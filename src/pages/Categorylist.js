@@ -21,7 +21,10 @@ const columns = [
     dataIndex: "name",
     sorter: (a, b) => a.name.length - b.name.length,
   },
-
+  {
+    title: "Market",
+    dataIndex: "market",
+  },
   {
     title: "Action",
     dataIndex: "action",
@@ -39,35 +42,37 @@ const Categorylist = () => {
   const hideModal = () => {
     setOpen(false);
   };
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetState());
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
+  
   const pCatStat = useSelector((state) => state.pCategory.pCategories);
-  const data1 = [];
-  for (let i = 0; i < pCatStat.length; i++) {
-    data1.push({
-      key: i + 1,
-      name: pCatStat[i].title,
-      action: (
-        <>
-          <Link
-            to={`/admin/category/${pCatStat[i]._id}`}
-            className=" fs-3 text-danger"
-          >
-            <BiEdit />
-          </Link>
-          <button
-            className="ms-3 fs-3 text-danger bg-transparent border-0"
-            onClick={() => showModal(pCatStat[i]._id)}
-          >
-            <AiFillDelete />
-          </button>
-        </>
-      ),
-    });
-  }
+  
+  const data1 = pCatStat.map((category, index) => ({
+    key: index + 1,
+    name: category.name,
+    market: category.Market ? category.Market.name : 'No Market',  // Assuming the market is populated as `Market`
+    action: (
+      <>
+        <Link
+          to={`/admin/category/${category._id}`}
+          className="fs-3 text-danger"
+        >
+          <BiEdit />
+        </Link>
+        <button
+          className="ms-3 fs-3 text-danger bg-transparent border-0"
+          onClick={() => showModal(category._id)}
+        >
+          <AiFillDelete />
+        </button>
+      </>
+    ),
+  }));
+
   const deleteCategory = (e) => {
     dispatch(deleteAProductCategory(e));
     setOpen(false);
@@ -75,6 +80,7 @@ const Categorylist = () => {
       dispatch(getCategories());
     }, 100);
   };
+  
   return (
     <div>
       <h3 className="mb-4 title">Product Categories</h3>
