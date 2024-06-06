@@ -32,6 +32,8 @@ import AddCustomers from "./pages/AddCostumers";
 import UserDetails from "./pages/UserDetails";
 import AddSubCat from "./pages/AddSubCat";
 import SubCatList from "./pages/SubCatList";
+import SubSubList from "./pages/SubSubList";
+import AddSubSubCat from "./pages/AddSubSubCat";
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
@@ -69,6 +71,8 @@ function App() {
           <Route path="category" element={<Addcat />} />
           <Route path="list-subcategory" element={<SubCatList />} />
           <Route path="sub-category" element={<AddSubCat />} />
+          <Route path="list-subsubcategory" element={<SubSubList />} />
+          <Route path="subsub-category" element={<AddSubSubCat />} />
           <Route path="category/:id" element={<Addcat />} />
           <Route path="list-brand" element={<Brandlist />} />
           <Route path="brand" element={<Addbrand />} />

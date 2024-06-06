@@ -105,7 +105,7 @@ const MainLayout = () => {
                 {
                   key: "brand",
                   icon: <SiBrandfolder className="fs-4" />,
-                  label: "Brand",
+                  label: "Add Brand",
                 },
                 {
                   key: "list-brand",
@@ -115,7 +115,7 @@ const MainLayout = () => {
                 {
                   key: "category",
                   icon: <BiCategoryAlt className="fs-4" />,
-                  label: "Category",
+                  label: "Add Category",
                 },
                 {
                   key: "list-category",
@@ -125,12 +125,22 @@ const MainLayout = () => {
                 {
                   key: "sub-category",
                   icon: <BiCategoryAlt className="fs-4" />,
-                  label: "Sub-Category",
+                  label: "Add SubCategory",
                 },
                 {
                   key: "list-subcategory",
                   icon: <BiCategoryAlt className="fs-4" />,
                   label: "SubCategory List",
+                },
+                {
+                  key: "subsub-category",
+                  icon: <BiCategoryAlt className="fs-4" />,
+                  label: "Add SubSubCategory",
+                },
+                {
+                  key: "list-subsubcategory",
+                  icon: <BiCategoryAlt className="fs-4" />,
+                  label: "SubSubCategory List",
                 },
                 {
                   key: "color",
