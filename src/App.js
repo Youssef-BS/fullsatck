@@ -30,6 +30,8 @@ import EditProduct from "./pages/editProduct";
 import Signup from "./pages/SignUp";
 import AddCustomers from "./pages/AddCostumers";
 import UserDetails from "./pages/UserDetails";
+import AddSubCat from "./pages/AddSubCat";
+import SubCatList from "./pages/SubCatList";
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
@@ -65,6 +67,8 @@ function App() {
           <Route path="color/:id" element={<Addcolor />} />
           <Route path="list-category" element={<Categorylist />} />
           <Route path="category" element={<Addcat />} />
+          <Route path="list-subcategory" element={<SubCatList />} />
+          <Route path="sub-category" element={<AddSubCat />} />
           <Route path="category/:id" element={<Addcat />} />
           <Route path="list-brand" element={<Brandlist />} />
           <Route path="brand" element={<Addbrand />} />

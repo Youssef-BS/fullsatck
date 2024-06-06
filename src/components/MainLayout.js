@@ -40,12 +40,8 @@ const MainLayout = () => {
    authState.user=""
   }
 
-
-    
-
-  
   return (
-    <Layout /* onContextMenu={(e) => e.preventDefault()} */>
+    <Layout >
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
           <h2 className="text-white fs-5 text-center py-3 mb-0">
@@ -125,6 +121,16 @@ const MainLayout = () => {
                   key: "list-category",
                   icon: <BiCategoryAlt className="fs-4" />,
                   label: "Category List",
+                },
+                {
+                  key: "sub-category",
+                  icon: <BiCategoryAlt className="fs-4" />,
+                  label: "Sub-Category",
+                },
+                {
+                  key: "list-subcategory",
+                  icon: <BiCategoryAlt className="fs-4" />,
+                  label: "SubCategory List",
                 },
                 {
                   key: "color",
