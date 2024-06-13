@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import {
   deleteAProductCategory,
-  getCategories,
+  getSubCategories,
   resetState,
 } from "../features/pSubcategory/pSubcategorySlice";
 
@@ -48,10 +48,10 @@ const SubCatList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetState());
-    dispatch(getCategories());
+    dispatch(getSubCategories());
   }, [dispatch]);
   
-  const pCatStat = useSelector((state) => state.pCategory.pCategories);
+  const pCatStat = useSelector((state) => state.pSubCategory.pSubCategories);
   
   const data1 = pCatStat.map((category, index) => ({
     key: index + 1,
@@ -79,7 +79,7 @@ const SubCatList = () => {
     dispatch(deleteAProductCategory(e));
     setOpen(false);
     setTimeout(() => {
-      dispatch(getCategories());
+      dispatch(getSubCategories());
     }, 100);
   };
   

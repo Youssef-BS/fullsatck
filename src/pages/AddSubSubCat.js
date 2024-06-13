@@ -12,7 +12,7 @@ import {
   updateAProductCategory,
 } from "../features/subSubCategory/pSubSubcategorySlice";
 
-import { getCategories } from "../features/pSubcategory/pSubcategorySlice";
+import { getSubCategories } from "../features/pSubcategory/pSubcategorySlice";
 
 let schema = yup.object().shape({
   name: yup.string().required("SubSubCategory Name is Required"),
@@ -38,7 +38,7 @@ const AddSubSubCat = () => {
   } = newCategory;
 
   useEffect(() => {
-    dispatch(getCategories()).then((response) => {
+    dispatch(getSubCategories()).then((response) => {
       if (response.payload) {
         setcategory(response.payload);
       }

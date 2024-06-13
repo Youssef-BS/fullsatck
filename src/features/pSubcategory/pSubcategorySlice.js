@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import pSubCategoryService from "./pSubcategoryService";
 
-export const getCategories = createAsyncThunk(
+export const getSubCategories = createAsyncThunk(
   "productCategory/get-categories",
   async (thunkAPI) => {
     try {
@@ -55,28 +55,28 @@ export const getAProductCategory = createAsyncThunk(
 export const resetState = createAction("RevertAll");
 
 const initialState = {
-  pCategories: [],
+  pSubCategories: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
 };
 export const pSubCategorySlice = createSlice({
-  name: "pCategories",
+  name: "pSubCategories",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCategories.pending, (state) => {
+      .addCase(getSubCategories.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCategories.fulfilled, (state, action) => {
+      .addCase(getSubCategories.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.pCategories = action.payload;
+        state.pSubCategories = action.payload;
       })
-      .addCase(getCategories.rejected, (state, action) => {
+      .addCase(getSubCategories.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
