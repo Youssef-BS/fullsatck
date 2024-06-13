@@ -34,6 +34,7 @@ import AddSubCat from "./pages/AddSubCat";
 import SubCatList from "./pages/SubCatList";
 import SubSubList from "./pages/SubSubList";
 import AddSubSubCat from "./pages/AddSubSubCat";
+import UserToVerif from "./pages/UserToVerif";
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
@@ -62,6 +63,7 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="order/:id" element={<ViewOrder />} />
           <Route path="customers" element={<Customers />} />
+          <Route path="customers-not-verif" element={<UserToVerif />} />
           <Route path="add-customers" element={<AddCustomers />} />
           <Route path="user-details/:id" element={<UserDetails />} />
           <Route path="list-color" element={<Colorlist />} />

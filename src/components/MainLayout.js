@@ -81,7 +81,7 @@ const MainLayout = () => {
                   label: "Add customers",
                 } ,
                 {
-                  key: "customers-not-verified",
+                  key: "customers-not-verif",
                   icon: <AiOutlineUser className="fs-4" />,
                   label: "Customer not verified",
                 }
