@@ -19,9 +19,6 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { Layout, Menu, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {logout}  from "../features/auth/authSlice";
-import authService from "../features/auth/authServices";
-import Authorised from "../utils/auth";
 
 
 const { Header, Sider, Content } = Layout;
@@ -152,6 +149,34 @@ const MainLayout = () => {
                   icon: <AiOutlineBgColors className="fs-4" />,
                   label: "Color List",
                 },
+              ],
+            },
+            {
+              key: "Projects",
+              icon: <AiOutlineShoppingCart className="fs-4" />,
+              label: "Projects",
+              children: [
+                {
+                  key: "projects",
+                  icon: <AiOutlineShoppingCart className="fs-4" />,
+                  label: "Add project",
+                },
+                {
+                  key: "list-project",
+                  icon: <AiOutlineShoppingCart className="fs-4" />,
+                  label: "Project List",
+                },
+                {
+                  key: "addProjectProduct",
+                  icon: <AiOutlineShoppingCart className="fs-4" />,
+                  label: "Add project product",
+                },
+                {
+                  key: "addProjectProductList",
+                  icon: <AiOutlineShoppingCart className="fs-4" />,
+                  label: "Project product List",
+                },
+               
               ],
             },
             {

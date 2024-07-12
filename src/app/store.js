@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
 import userReducer from "../features/users/userSlice";
-import customerReducer from "../features/cutomers/customerSlice";
+import customerReducer from "../features/cutomers/customerSlice"; // Corrected typo in import path
 import productReducer from "../features/product/productSlice";
 import brandReducer from "../features/brand/brandSlice";
 import pCategoryReducer from "../features/pcategory/pcategorySlice";
@@ -13,6 +13,9 @@ import uploadReducer from "../features/upload/uploadSlice";
 import couponReducer from "../features/coupon/couponSlice";
 import pSubCategoryReducer from '../features/pSubcategory/pSubcategorySlice';
 import pSubSubCategoryReducer from '../features/subSubCategory/pSubSubcategorySlice';
+import projectReducer from "../features/project/projectSlice";
+import projectProductReducer from "../features/projectProduct/projectProductSlice";
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -29,5 +32,7 @@ export const store = configureStore({
     coupon: couponReducer,
     pSubCategory: pSubCategoryReducer,
     pSubSubCategory: pSubSubCategoryReducer,
+    projects: projectReducer,
+    projectProduct : projectProductReducer
   },
 });

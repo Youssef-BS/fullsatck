@@ -35,6 +35,11 @@ import SubCatList from "./pages/SubCatList";
 import SubSubList from "./pages/SubSubList";
 import AddSubSubCat from "./pages/AddSubSubCat";
 import UserToVerif from "./pages/UserToVerif";
+import Projects from "./pages/Projects";
+import AddProject from "./pages/AddProject";
+import UpdateProject from "./pages/UpdateProject";
+import AddProjectProduct from "./pages/AddProjectProduct";
+import ProjectProductList from "./pages/ProjectProductList";
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
@@ -65,6 +70,9 @@ function App() {
           <Route path="customers" element={<Customers />} />
           <Route path="customers-not-verif" element={<UserToVerif />} />
           <Route path="add-customers" element={<AddCustomers />} />
+          <Route path="projects" element={<AddProject />} />
+          <Route path="list-project" element={<Projects />} />
+          <Route path="edit_project/:id" element={<UpdateProject />} />
           <Route path="user-details/:id" element={<UserDetails />} />
           <Route path="list-color" element={<Colorlist />} />
           <Route path="color" element={<Addcolor />} />
@@ -82,6 +90,8 @@ function App() {
           <Route path="list-product" element={<Productlist />} />
           <Route path="product" element={<Addproduct />} />
           <Route path="edit_product/:id" element={<EditProduct />} />
+          <Route path="addProjectProduct" element={<AddProjectProduct />} />
+          <Route path="addProjectProductList" element={<ProjectProductList />} />
         </Route>
         <Route path= "/*" element={<Login/>}/>
       </Routes>

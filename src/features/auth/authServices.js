@@ -24,10 +24,21 @@ const login = async (user) => {
     }
 };
 
+const acceptUser =  async (id) => {
+  try {
+    const response = await axios.put(`${base_url}/acceptAccount/${id}`);
+    return response.data;
+  }catch(err){
+  throw new Error(err.message);
+  }
+}
+
 
 const authService = {
   login,
   getCurrentUser,
+  acceptUser , 
+  
  
 };
 

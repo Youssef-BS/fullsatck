@@ -1,347 +1,286 @@
-import { React, useEffect, useState } from "react";
-import CustomInput from "../components/CustomInput";
-import ReactQuill from "react-quill";
-import { useNavigate,useParams } from "react-router-dom";
-import "react-quill/dist/quill.snow.css";
-import { toast } from "react-toastify";
-import * as yup from "yup";
-import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { getBrands } from "../features/brand/brandSlice";
-import { getCategories } from "../features/pcategory/pcategorySlice";
-import { getColors } from "../features/color/colorSlice";
-import { Select } from "antd";
-import Dropzone from "react-dropzone";
-import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts, getProduct, resetState, updateProduct } from "../features/product/productSlice";
-let schema = yup.object().shape({
-  title: yup.string().required("Title is Required"),
-  description: yup.string().required("Description is Required"),
-  price: yup.number().required("Price is Required"),
-  brand: yup.string().required("Brand is Required"),
-  category: yup.string().required("Category is Required"),
-  tags: yup.string().required("Tag is Required"),
-  color: yup
-    .array()
-    .min(1, "Pick at least one color")
-    .required("Color is Required"),
-  quantity: yup.number().required("Quantity is Required"),
-});
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProduct, updateProduct } from '../features/product/productSlice';
+import { getBrands } from '../features/brand/brandSlice';
+import { useParams } from 'react-router-dom';
 
-const EditProduct = () => {
+const UpdateProduct = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [color, setColor] = useState([]);
-  const [images, setImages] = useState([]);
-  const {id} = useParams();
-  
+  const product = useSelector((state) => state.product.product);
+  const markets = useSelector((state) => state.brand.brands);
+
+  console.log(id)
+
+  const [formState, setFormState] = useState({
+    code: '',
+    title: '',
+    description: '',
+    image: '',
+    extraImages: [],
+    extraVideo: '',
+    price: '',
+    availability: '',
+    stockEta: '',
+    features: '',
+    technicalDetails: '',
+    selectedMarket: '',
+    selectedCategory: '',
+    selectedSubcategory: '',
+    selectedSubSubcategory: ''
+  });
 
   useEffect(() => {
+    dispatch(getProduct(id));
     dispatch(getBrands());
-    dispatch(getCategories());
-    dispatch(getColors());
-    dispatch(getProduct(id))
-  }, []);
-  const brandState = useSelector((state) => state.brand.brands);
-  const catState = useSelector((state) => state.pCategory.pCategories);
-  const colorState = useSelector((state) => state.color.colors);
-  const imgState = useSelector((state) => state.upload.images);
-  const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, isLoading, updateproduct,productUpdated } = newProduct;
-  console.log(updateProduct)
-  useEffect(() => {
-    if (productUpdated) {
-      toast.success("Product Update Successfullly!");
+  }, [dispatch, id]);
 
+  useEffect(() => {
+    if (product) {
+      setFormState({
+        code: product.code,
+        title: product.title,
+        description: product.description,
+        image: product.image,
+        extraImages: product.extra_images || [],
+        extraVideo: product.extra_video || '',
+        price: product.price,
+        availability: product.availability,
+        stockEta: product.stock_eta,
+        features: product.features,
+        technicalDetails: product.technical_details,
+        selectedMarket: product.marketId,
+        selectedCategory: product.categoryId,
+        selectedSubcategory: product.subcategoryId,
+        selectedSubSubcategory: product.subSubcategoryId
+      });
     }
-   
+  }, [product]);
 
-
-   
-  }, [productUpdated]);
-  
-  const productState = useSelector((state) => state.product.product);
-  const data1 = [];
-  
-    data1.push({
-      id:productState._id,
-      title: productState.title,
-      description: productState.description,
-      quantity: productState.quantity,
-      images: productState.images,
-      brand: productState.brand,
-      category: productState.category,
-      color: productState.color,
-      price: `${productState.price}`,
-      tags: productState.tags
-    })
-  const coloropt = [];
-  colorState.forEach((i) => {
-    coloropt.push({
-      label: i.title,
-      value: i._id,
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: value
     });
-  });
-  const colorr = [];
-  (data1[0].color || []).forEach((i) => {
-    colorr.push({
-      label: i.title,
-      value: i._id,
-    });
-  });
-
-  const handleColors = (e) => {
-    setColor(e);
   };
-  const [imgStates, setImgStates] = useState(data1[0].images,imgState); // initial array of images
-  
-  const img = [];
-  (imgState || []).forEach((i) => {
-    img.push({
-      public_id: i.public_id,
-      url: i.url,
-    });
-  });
-  (imgStates || []).forEach((i) => {
-    img.push({
-      public_id: i.public_id,
-      url: i.url,
-    });
-  });
-  console.log(imgStates)
-  console.log(imgState)
-  console.log(data1[0].images)
-  
 
-
-  useEffect(() => {
-    formik.values.color = color ? color : " ";
-    formik.values.images = img;
-  }, [color, img]);
-
-  const handleDelete = (publicId) => {
-    // filter out the image with the specified public_id
-    const updatedImgState = imgStates.filter((img) => img.public_id !== publicId);
-    setImgStates(updatedImgState);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedProduct = {
+        id,
+        ...formState,
+        price: parseFloat(formState.price),
+        marketId: parseInt(formState.selectedMarket),
+        categoryId: parseInt(formState.selectedCategory),
+        subcategoryId: parseInt(formState.selectedSubcategory),
+        subSubcategoryId: parseInt(formState.selectedSubSubcategory)
+      };
+      dispatch(updateProduct(updatedProduct));
+      // Optionally, reset the form or navigate away
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
   };
- 
-  
-    const formik = useFormik({
-      initialValues: {
-        _id: data1[0].id,
-        title: data1[0].title,
-        description: data1[0].description,
-        price: data1[0].price,
-        category: data1[0].category,
-        brand: data1[0].brand,
-        quantity: data1[0].quantity,
-        images: data1[0].images,
-        color: data1[0].color,
-        tags: data1[0].tags,
-        
-        
-        
-      },
-      validationSchema: schema,
-      validationSchema: schema,
-    onSubmit: (values) => {
-      dispatch(updateProduct(values));
-      formik.resetForm();
-      setColor(null);
-      imgState=null;
-      setImgStates(null)
-      setTimeout(() => {
-        dispatch(resetState());
-      }, 1000);
-    },
-  });
+
   return (
-    <div>
-    <h3 className="mb-4 title">Add Product</h3>
-    <div>
-      <form
-        onSubmit={formik.handleSubmit}
-        className="d-flex gap-3 flex-column"
-      >
-        <CustomInput
-          type="text"
-          label="Enter Product Title"
-          name="title"
-          onChng={formik.handleChange("title")}
-          onBlr={formik.handleBlur("title")}
-          val={formik.values.title}
-        />
-        <div className="error">
-          {formik.touched.title && formik.errors.title}
-        </div>
-        <div className="">
-          <ReactQuill
-            theme="snow"
-            name="description"
-            onChange={formik.handleChange("description")}
-            value={formik.values.description}
+    <div className="container mt-5">
+      <h2>Update Product</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Form Fields with values and onChange handlers */}
+        <div className="form-group">
+          <label>Product Code:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="code"
+            value={formState.code}
+            onChange={handleInputChange}
+            required
           />
         </div>
-        <div className="error">
-          {formik.touched.description && formik.errors.description}
+        <div className="form-group">
+          <label>Title:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="title"
+            value={formState.title}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <CustomInput
-          type="number"
-          label="Enter Product Price"
-          name="price"
-          onChng={formik.handleChange("price")}
-          onBlr={formik.handleBlur("price")}
-          val={formik.values.price}
-        />
-        <div className="error">
-          {formik.touched.price && formik.errors.price}
+        <div className="form-group">
+          <label>Description:</label>
+          <textarea
+            className="form-control"
+            rows="3"
+            name="description"
+            value={formState.description}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <select
-          name="brand"
-          onChange={formik.handleChange("brand")}
-          onBlur={formik.handleBlur("brand")}
-          value={formik.values.brand}
-          className="form-control py-3 mb-3"
-          id=""
-        >
-          <option value="">Select Brand</option>
-          {brandState.map((i, j) => {
-            return (
-              <option key={j} value={i.title}>
-                {i.title}
-              </option>
-            );
-          })}
-        </select>
-        <div className="error">
-          {formik.touched.brand && formik.errors.brand}
+        <div className="form-group">
+          <label>Image URL:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="image"
+            value={formState.image}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <select
-          name="category"
-          onChange={formik.handleChange("category")}
-          onBlur={formik.handleBlur("category")}
-          value={formik.values.category}
-          className="form-control py-3 mb-3"
-          id=""
-        >
-          <option value="">Select Category</option>
-          {catState.map((i, j) => {
-            return (
-              <option key={j} value={i.title}>
-                {i.title}
-              </option>
-            );
-          })}
-        </select>
-        <div className="error">
-          {formik.touched.category && formik.errors.category}
+        <div className="form-group">
+          <label>Extra Images:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="extraImages"
+            value={formState.extraImages.join(',')}
+            onChange={(e) => handleInputChange({ target: { name: 'extraImages', value: e.target.value.split(',') } })}
+          />
+          <small className="form-text text-muted">Enter multiple URLs separated by commas</small>
         </div>
-        <select
-          name="tags"
-          onChange={formik.handleChange("tags")}
-          onBlur={formik.handleBlur("tags")}
-          value={formik.values.tags}
-          className="form-control py-3 mb-3"
-          id=""
-        >
-          <option value="" disabled>
-            Select Category
-          </option>
-          <option value="featured">Featured</option>
-          <option value="popular">Popular</option>
-          <option value="special">Special</option>
-        </select>
-        <div className="error">
-          {formik.touched.tags && formik.errors.tags}
+        <div className="form-group">
+          <label>Extra Video:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="extraVideo"
+            value={formState.extraVideo}
+            onChange={handleInputChange}
+          />
         </div>
-
-        <Select
-          mode="multiple"
-          allowClear
-          className="w-100"
-          placeholder="Select colors"
-          value={color}
-          onChange={(i) => handleColors(i)}
-          options={coloropt}
-        />
-        <div className="error">
-          {formik.touched.color && formik.errors.color}
+        <div className="form-group">
+          <label>Price:</label>
+          <input
+            type="number"
+            step="0.01"
+            className="form-control"
+            name="price"
+            value={formState.price}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <CustomInput
-          type="number"
-          label="Enter Product Quantity"
-          name="quantity"
-          onChng={formik.handleChange("quantity")}
-          onBlr={formik.handleBlur("quantity")}
-          val={formik.values.quantity}
-        />
-        <div className="error">
-          {formik.touched.quantity && formik.errors.quantity}
-        </div>
-        <div className="bg-white border-1 p-5 text-center">
-          <Dropzone
-            onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
+        <div className="form-group">
+          <label>Availability:</label>
+          <select
+            className="form-control"
+            name="availability"
+            value={formState.availability}
+            onChange={handleInputChange}
+            required
           >
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <p>
-                    Drag 'n' drop some files here, or click to select files
-                  </p>
-                </div>
-              </section>
-            )}
-          </Dropzone>
+            <option value="">Select Availability</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
         </div>
-        <div className="showimages d-flex flex-wrap gap-3">
-       
-            {imgStates?.map((i, j) => {
-            return (
-              <div className=" position-relative" key={j}>
-                <button
-                  type="button"
-                  onClick={() => {dispatch(delImg(i.public_id));
-                    handleDelete(i.public_id)
-                  }}
-                  className="btn-close position-absolute"
-                  style={{ top: "10px", right: "10px" }}
-                ></button>
-                <img src={i.url} alt="" width={200} height={200} />
-              </div>
-            );
-          })}
+        <div className="form-group">
+          <label>Stock ETA:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="stockEta"
+            value={formState.stockEta}
+            onChange={handleInputChange}
+          />
         </div>
-        <div className="showimages d-flex flex-wrap gap-3">
-       
-            {imgState?.map((i, j) => {
-            return (
-              <div className=" position-relative" key={j}>
-                <button
-                  type="button"
-                  onClick={() => {dispatch(delImg(i.public_id));
-                    handleDelete(i.public_id)
-                  }}
-                  className="btn-close position-absolute"
-                  style={{ top: "10px", right: "10px" }}
-                ></button>
-                <img src={i.url} alt="" width={200} height={200} />
-              </div>
-            );
-          })}
+        <div className="form-group">
+          <label>Features:</label>
+          <textarea
+            className="form-control"
+            rows="3"
+            name="features"
+            value={formState.features}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        
-       
-        <button
-          className="btn btn-success border-0 rounded-3 my-5"
-          type="submit"
-        >
-          Add Product
-        </button>
+        <div className="form-group">
+          <label>Technical Details:</label>
+          <textarea
+            className="form-control"
+            rows="3"
+            name="technicalDetails"
+            value={formState.technicalDetails}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="market">Select Market</label>
+          <select
+            className="form-control"
+            id="market"
+            name="selectedMarket"
+            value={formState.selectedMarket}
+            onChange={handleInputChange}
+          >
+            <option value="">Select a market</option>
+            {markets.map(market => (
+              <option key={market.id} value={market.id}>{market.name}</option>
+            ))}
+          </select>
+        </div>
+        {formState.selectedMarket && (
+          <div className="form-group">
+            <label htmlFor="category">Select Category</label>
+            <select
+              className="form-control"
+              id="category"
+              name="selectedCategory"
+              value={formState.selectedCategory}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a category</option>
+              {markets.find(m => m.id === formState.selectedMarket)?.Categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {formState.selectedCategory && (
+          <div className="form-group">
+            <label htmlFor="subcategory">Select Subcategory</label>
+            <select
+              className="form-control"
+              id="subcategory"
+              name="selectedSubcategory"
+              value={formState.selectedSubcategory}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a subcategory</option>
+              {markets.find(m => m.id === formState.selectedMarket)?.Categories.find(c => c.id === formState.selectedCategory)?.Subcategories.map(subcategory => (
+                <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {formState.selectedSubcategory && (
+          <div className="form-group">
+            <label htmlFor="subsubcategory">Select SubSubcategory</label>
+            <select
+              className="form-control"
+              id="subsubcategory"
+              name="selectedSubSubcategory"
+              value={formState.selectedSubSubcategory}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a subsubcategory</option>
+              {markets.find(m => m.id === formState.selectedMarket)?.Categories.find(c => c.id === formState.selectedCategory)?.Subcategories.find(sc => sc.id === formState.selectedSubcategory)?.SubSubcategories.map(subsub => (
+                <option key={subsub.id} value={subsub.id}>{subsub.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        <button type="submit" className="btn btn-primary">Update Product</button>
       </form>
     </div>
-  </div>
   );
 };
 
-export default EditProduct;
+export default UpdateProduct;

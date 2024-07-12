@@ -26,7 +26,7 @@ const Productlist = () => {
         category: product.Category?.name,
         subcategory: product.Subcategory ? product.Subcategory.name : "",
         subSubcategory: product.SubSubcategory ? product.SubSubcategory.name : "",
-        price: product.price.toFixed(2),
+        price: product.price,
         description: product.description,
         action: (
           <>

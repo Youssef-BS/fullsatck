@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { createProducts } from '../features/product/productSlice';
+import { getBrands } from '../features/brand/brandSlice';
 
 const Addproduct = () => {
   const [code, setCode] = useState('');
@@ -18,8 +19,33 @@ const Addproduct = () => {
   const [categoryId, setCategoryId] = useState(null);
   const [subcategoryId, setSubcategoryId] = useState(null);
   const [subSubcategoryId, setSubSubcategoryId] = useState(null);
-
+  const [selectedMarket, setSelectedMarket] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
+  const [selectedSubSubcategory, setSelectedSubSubcategory] = useState('');
   const dispatch = useDispatch();
+
+  const handleMarketChange = (e) => {
+    setSelectedMarket(e.target.value);
+    setSelectedCategory('');
+    setSelectedSubcategory('');
+    setSelectedSubSubcategory('');
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setSelectedSubcategory('');
+    setSelectedSubSubcategory('');
+  };
+
+  const handleSubcategoryChange = (e) => {
+    setSelectedSubcategory(e.target.value);
+    setSelectedSubSubcategory('');
+  };
+
+  const handleSubSubcategoryChange = (e) => {
+    setSelectedSubSubcategory(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,10 +62,10 @@ const Addproduct = () => {
         stock_eta: stockEta,
         features,
         technical_details: technicalDetails,
-        marketId: parseInt(marketId), // Ensure marketId is converted to integer if needed
-        categoryId: parseInt(categoryId),
-        subcategoryId: parseInt(subcategoryId),
-        subSubcategoryId: parseInt(subSubcategoryId),
+        marketId: parseInt(selectedMarket), // Ensure marketId is converted to integer if needed
+        categoryId: parseInt(selectedCategory),
+        subcategoryId: parseInt(selectedSubcategory),
+        subSubcategoryId: parseInt(selectedSubSubcategory),
       };
 
       dispatch(createProducts(newProduct)); // Dispatch action with new product data
@@ -50,6 +76,12 @@ const Addproduct = () => {
       // Handle error (show error message, etc.)
     }
   };
+  const markets = useSelector((state) => state.brand.brands);
+
+  useEffect(()=>{
+    dispatch(getBrands());
+  },[dispatch])
+console.log(markets)
 
   // Function to reset form fields after submission
   const resetForm = () => {
@@ -69,6 +101,17 @@ const Addproduct = () => {
     setSubcategoryId(null);
     setSubSubcategoryId(null);
   };
+  const renderOptions = (items, level = 0) => {
+    return items.map(item => (
+      <React.Fragment key={item.id}>
+        <option value={item.id}>
+          {'-'.repeat(level) + ' ' + item.name}
+        </option>
+        {item.children && renderOptions(item.children, level + 1)}
+      </React.Fragment>
+    ));
+  };
+
 
   return (
     <div className="container mt-5">
@@ -135,24 +178,68 @@ const Addproduct = () => {
         </div>
 
         <div className="form-group">
-          <label>Market ID:</label>
-          <input type="number" className="form-control" value={marketId} onChange={(e) => setMarketId(e.target.value)} />
+          <label htmlFor="market">Select Market</label>
+          <select
+            className="form-control"
+            id="market"
+            value={selectedMarket}
+            onChange={handleMarketChange}
+          >
+            <option value="">Select a market</option>
+            {markets.map(market => (
+              <option key={market.id} value={market.id}>{market.name}</option>
+            ))}
+          </select>
         </div>
+        {selectedMarket && (
+          <div className="form-group">
+            <label htmlFor="category">Select Category</label>
+            <select
+              className="form-control"
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Select a category</option>
+              {markets?.find(m => m.id == selectedMarket)?.Categories?.map(category => (
+                <option key={category?.id} value={category?.id}>{category?.name}</option>
 
-        <div className="form-group">
-          <label>Category ID:</label>
-          <input type="number" className="form-control" value={categoryId} onChange={(e) => setCategoryId(e.target.value)} />
-        </div>
-
-        <div className="form-group">
-          <label>Subcategory ID:</label>
-          <input type="number" className="form-control" value={subcategoryId} onChange={(e) => setSubcategoryId(e.target.value)} />
-        </div>
-
-        <div className="form-group">
-          <label>Subsubcategory ID:</label>
-          <input type="number" className="form-control" value={subSubcategoryId} onChange={(e) => setSubSubcategoryId(e.target.value)} />
-        </div>
+              ))}
+            </select>
+          </div>
+        )}
+        {selectedCategory && (
+          <div className="form-group">
+            <label htmlFor="subcategory">Select Subcategory</label>
+            <select
+              className="form-control"
+              id="subcategory"
+              value={selectedSubcategory}
+              onChange={handleSubcategoryChange}
+            >
+              <option value="">Select a subcategory</option>
+              {markets.find(m => m.id == selectedMarket)?.Categories.find(c => c.id == selectedCategory)?.Subcategories.map(subcategory => (
+                <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {selectedSubcategory && (
+          <div className="form-group">
+            <label htmlFor="subsubcategory">Select SubSubcategory</label>
+            <select
+              className="form-control"
+              id="subsubcategory"
+              value={selectedSubSubcategory}
+              onChange={handleSubSubcategoryChange}
+            >
+              <option value="">Select a subsubcategory</option>
+              {markets.find(m => m.id == selectedMarket)?.Categories.find(c => c.id == selectedCategory)?.Subcategories.find(sc => sc.id == selectedSubcategory)?.SubSubcategories.map(subsub => (
+                <option key={subsub.id} value={subsub.id}>{subsub.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <button type="submit" className="btn btn-primary">Add Product</button>
       </form>
