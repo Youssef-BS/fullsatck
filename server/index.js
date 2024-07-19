@@ -6,6 +6,8 @@ const Market = require('./Models/Market')
 const Category = require('./Models/Category')
 const Subcategory = require('./Models/Subcategory')
 const userRoutes = require('./Routes/userRoutes');
+const newsroomRoutes = require('./Routes/newsroomRoutes');
+const featuredProductRoutes = require('./Routes/featuredProductRoutes');
 const ProductRoutes = require('./Routes/ProductRoute')
 const WishlistRoute = require('./Routes/WishlistRoute')
 const CartRoute = require('./Routes/CartRoute')
@@ -54,7 +56,9 @@ sequelize.authenticate()
     Subcategory.hasMany(Product)
     Category.hasMany(Product)
     Newsroom.belongsTo(Product)
+    Product.hasMany(Newsroom);
     FeaturedProduct.belongsTo(Product)
+    Product.hasMany(FeaturedProduct);
     User.hasMany(Order);
 
 Order.belongsTo(User);
@@ -112,6 +116,8 @@ Product.hasMany(ProjectProduct, { foreignKey: 'productId' });
   app.use('/user', userRoutes);
   app.use('/projects' , projectRoutes);
   app.use("/project-product", projectProductRoutes)
+  app.use('/newsrooms', newsroomRoutes);
+  app.use('/featured-products', featuredProductRoutes);
  /* const insertMarkets = async () => {
     try {
       // Insert the first market
