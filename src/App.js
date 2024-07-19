@@ -40,6 +40,13 @@ import AddProject from "./pages/AddProject";
 import UpdateProject from "./pages/UpdateProject";
 import AddProjectProduct from "./pages/AddProjectProduct";
 import ProjectProductList from "./pages/ProjectProductList";
+import AddNewsRoom from "./pages/AddNewsRoom";
+import UpdateNewsRoom from "./pages/UpdateNewsRoom";
+import NewsRoomList from "./pages/newsRoomList";
+import AddFeaturedProduct from "./pages/AddFeaturedProduct";
+import ListFeaturedProduct from "./pages/ListFeaturedProduct";
+import UpdateFeaturedProduct from "./pages/UpdateFeaturedProduct";
+
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
@@ -92,6 +99,12 @@ function App() {
           <Route path="edit_product/:id" element={<EditProduct />} />
           <Route path="addProjectProduct" element={<AddProjectProduct />} />
           <Route path="addProjectProductList" element={<ProjectProductList />} />
+          <Route path="add-newsroom" element={<AddNewsRoom />} />
+          <Route path="newsroom-list" element={<NewsRoomList />} />
+          <Route path="newsroom/:id" element={<UpdateNewsRoom />} />
+          <Route path="add-featured-Product" element={<AddFeaturedProduct />} />
+          <Route path="featured-product-list" element={<ListFeaturedProduct />} />
+          <Route path="featuredProduct/:id" element={<UpdateFeaturedProduct />} />
         </Route>
         <Route path= "/*" element={<Login/>}/>
       </Routes>

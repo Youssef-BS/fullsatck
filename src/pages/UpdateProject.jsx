@@ -27,7 +27,7 @@ console.log(project, isLoading, isError, isLoading )
         title: project.title,
         description: project.description,
         image: project.image,
-        gallery: project.gallery.map(item => item.url),
+        gallery: project.gallery?.map(item => item.url),
       });
     }
   }, [project, form]);

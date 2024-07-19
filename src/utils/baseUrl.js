@@ -3,3 +3,5 @@ export const base_url_users = "http://localhost:3000/user";
 export const base_url_brand = "http://localhost:3000/pro";
 export const url_project = "http://localhost:3000/projects" ;
 export const url_project_product = "http://localhost:3000/project-product" ; 
+export const newsRoomUrl = "http://localhost:3000/newsrooms" ;
+export const featuredProductUrl = "http://localhost:3000/featured-products" ;

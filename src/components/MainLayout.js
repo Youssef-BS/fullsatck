@@ -202,6 +202,40 @@ const MainLayout = () => {
               ],
             },
             {
+              key: "NewsRoom",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "News room",
+              children: [
+                {
+                  key: "add-newsroom",
+                  icon: <ImBlog className="fs-4" />,
+                  label: "Add news Room",
+                },
+                {
+                  key: "newsroom-list",
+                  icon: <RiCouponLine className="fs-4" />,
+                  label: "newsRoom List",
+                },
+              ],
+            },
+            {
+              key: "Featured Products",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "Featured Products",
+              children: [
+                {
+                  key: "add-featured-Product",
+                  icon: <ImBlog className="fs-4" />,
+                  label: "Add Featured Product",
+                },
+                {
+                  key: "featured-product-list",
+                  icon: <RiCouponLine className="fs-4" />,
+                  label: "featured product List",
+                },
+              ],
+            },
+            {
               key: "blogs",
               icon: <FaBloggerB className="fs-4" />,
               label: "Blogs",
@@ -227,6 +261,7 @@ const MainLayout = () => {
                   label: "Blog Category List",
                 },
               ],
+              
             },
             {
               key: "enquiries",

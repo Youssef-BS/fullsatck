@@ -15,6 +15,8 @@ import pSubCategoryReducer from '../features/pSubcategory/pSubcategorySlice';
 import pSubSubCategoryReducer from '../features/subSubCategory/pSubSubcategorySlice';
 import projectReducer from "../features/project/projectSlice";
 import projectProductReducer from "../features/projectProduct/projectProductSlice";
+import newsroomReducer from "../features/newsRoom/newsroomSlice";
+import featuredProductReducer from "../features/featuredProduct/featuredProductSlice";
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +35,8 @@ export const store = configureStore({
     pSubCategory: pSubCategoryReducer,
     pSubSubCategory: pSubSubCategoryReducer,
     projects: projectReducer,
-    projectProduct : projectProductReducer
+    projectProduct : projectProductReducer,
+    newsroom: newsroomReducer,
+    featuredProduct: featuredProductReducer,
   },
 });
