@@ -62,30 +62,40 @@ const getProjectById = async (req, res) => {
 const updateProject = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, image, gallery } = req.body;
+    const { title, description, image, galleries } = req.body;
 
-    const project = await Project.findByPk(id);
+    const project = await Project.findByPk(id, {
+      include: [{ model: Gallery, as: 'galleries' }]
+    });
 
     if (!project) {
       return res.status(404).json({ message: 'Project not found' });
     }
 
+    // Update project details
     await project.update({ title, description, image });
 
-    if (gallery) {
-      // Remove existing gallery items
+    if (galleries && Array.isArray(galleries)) {
+      // Remove existing galleries
       await Gallery.destroy({ where: { ProjectId: id } });
 
       // Add new gallery items
-      const galleryInstances = gallery.map(item => ({ url: item.url, ProjectId: id }));
+      const galleryInstances = galleries.map(item => ({ url: item.url, ProjectId: id }));
       await Gallery.bulkCreate(galleryInstances);
     }
 
-    res.status(200).json(project);
+    // Fetch the updated project with new galleries
+    const updatedProject = await Project.findByPk(id, {
+      include: [{ model: Gallery, as: 'galleries' }]
+    });
+
+    res.status(200).json(updatedProject);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error updating project:", error);
+    res.status(500).json({ message: "Failed to update project" });
   }
 };
+
 
 const deleteProject = async (req, res) => {
   try {

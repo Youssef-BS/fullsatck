@@ -113,13 +113,19 @@ const deletedMarkets = asyncHandler(async (req, res) => {
 
 
 const createMarkets = asyncHandler(async (req, res) => {
-  const { name } = req.body;
-  const imagePath = req.file.path;
+  const { name , image} = req.body;
+
+  console.log('Request Body:', req.body);
+  console.log('Uploaded File:', req.file);
+
+  if (!name || !image) {
+    return res.status(400).json({ message: 'Name and image are required' });
+  }
 
   try {
     const newMarket = await Market.create({
       name: name,
-      image: imagePath,
+      image: image,
     });
 
     res.status(201).json(newMarket);
@@ -128,6 +134,7 @@ const createMarkets = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Error creating market', error: error.message });
   }
 });
+
 
 
 

@@ -17,6 +17,7 @@ const {getSubSubcategories} = require('../Controller/ProductCtrl');
 const {getSubSubcategoryById} = require('../Controller/ProductCtrl');
 const {getMarketAndCategories} = require('../Controller/ProductCtrl');
 const {createProduct} = require('../Controller/ProductCtrl');
+const {updateProduct} = require('../Controller/ProductCtrl');
 
 const router = express.Router();
 
@@ -40,5 +41,6 @@ router.post('/createSubSubcategory',createSubSubcategory)
 router.get('/subSubcategory',getSubSubcategories)
 router.get('/get-subSubcategory/:id',getSubSubcategoryById)
 router.get('/marketAndCategories/:marketId',getMarketAndCategories)
+router.put('/updateProduct/:id' , updateProduct)
 
 module.exports = router ;
