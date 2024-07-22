@@ -21594,7 +21594,7 @@ nav#ddfullscreenmenu .mobile-menu-item a:hover {
   --black-dark: #080808;
   --black-light: #070707;
   --black-lighter: #171717;
-  --orange: #F58220;
+  --orange: red;
 }
 
 html,body {
@@ -25797,7 +25797,7 @@ span.credit_message.show {
   --black-dark: #080808;
   --black-light: #070707;
   --black-lighter: #171717;
-  --orange: #f58220;
+  --orange: red;
 }
 
 /* Reset */
