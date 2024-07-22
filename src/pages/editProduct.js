@@ -10,8 +10,6 @@ const UpdateProduct = () => {
   const product = useSelector((state) => state.product.product);
   const markets = useSelector((state) => state.brand.brands);
 
-  console.log(id)
-
   const [formState, setFormState] = useState({
     code: '',
     title: '',
@@ -77,7 +75,7 @@ const UpdateProduct = () => {
         subcategoryId: parseInt(formState.selectedSubcategory),
         subSubcategoryId: parseInt(formState.selectedSubSubcategory)
       };
-      dispatch(updateProduct(updatedProduct));
+      dispatch(updateProduct({productId: id, productData: updatedProduct}));
       // Optionally, reset the form or navigate away
     } catch (error) {
       console.error('Error updating product:', error);
@@ -88,7 +86,6 @@ const UpdateProduct = () => {
     <div className="container mt-5">
       <h2>Update Product</h2>
       <form onSubmit={handleSubmit}>
-        {/* Form Fields with values and onChange handlers */}
         <div className="form-group">
           <label>Product Code:</label>
           <input

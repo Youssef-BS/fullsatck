@@ -14,7 +14,7 @@ const UpdateProject = () => {
   const isError = useSelector((state) => state.projects.isError);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
-console.log(project, isLoading, isError, isLoading )
+
   useEffect(() => {
     if (id) {
       dispatch(getProjectById(id));
@@ -27,7 +27,7 @@ console.log(project, isLoading, isError, isLoading )
         title: project.title,
         description: project.description,
         image: project.image,
-        gallery: project.gallery?.map(item => item.url),
+        galleries: project.galleries?.map(item => ({ url: item.url })),
       });
     }
   }, [project, form]);
@@ -43,15 +43,15 @@ console.log(project, isLoading, isError, isLoading )
         return;
       }
 
-      // Map the gallery URLs into the expected format
-      const gallery = values.gallery.map(url => ({ url }));
+      // Map the galleries URLs into the expected format
+      const galleries = values.galleries.map(url => ({ url: url.url }));
 
       // Create the project object to send to the backend
       const projectData = {
         title: values.title,
         description: values.description,
         image: values.image,
-        gallery: gallery,
+        galleries: galleries,
       };
 
       // Dispatch action to update the project
@@ -88,7 +88,7 @@ console.log(project, isLoading, isError, isLoading )
             title: project?.title,
             description: project?.description,
             image: project?.image,
-            gallery: project?.gallery?.map(item => item.url),
+            galleries: project?.galleries?.map(item => ({ url: item.url })),
           }}
         >
           <Form.Item
@@ -117,20 +117,29 @@ console.log(project, isLoading, isError, isLoading )
             <Input />
           </Form.Item>
 
-          <Form.List name="gallery">
+          <Form.List name="galleries">
             {(fields, { add, remove }) => (
               <>
                 <Form.Item label="Gallery Paths">
                   {fields.map(({ key, name, fieldKey, ...restField }) => (
-                    <Form.Item
-                      {...restField}
-                      key={key}
-                      name={[name, 'url']}
-                      fieldKey={[fieldKey, 'url']}
-                      
-                    >
-                      <Input placeholder="Gallery Image URL" />
-                    </Form.Item>
+                    <div key={key} style={{ display: 'flex', marginBottom: 8 }}>
+                      <Form.Item
+                        {...restField}
+                        name={[name, 'url']}
+                        fieldKey={[fieldKey, 'url']}
+                        rules={[{ required: true, message: 'Please enter gallery image URL' }]}
+                        style={{ flex: 1 }}
+                      >
+                        <Input placeholder="Gallery Image URL" />
+                      </Form.Item>
+                      <Button
+                        type="danger"
+                        onClick={() => remove(name)}
+                        style={{ marginLeft: 8 }}
+                      >
+                        Remove
+                      </Button>
+                    </div>
                   ))}
                 </Form.Item>
                 <Form.Item>

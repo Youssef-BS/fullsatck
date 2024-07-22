@@ -56,11 +56,11 @@ const NewsRoomList = () => {
   ];
 
   // Transform newsrooms into the format required by Ant Design Table
-  const dataSource = newsrooms.map((newsroom, index) => ({
+  const dataSource = newsrooms?.map((newsroom, index) => ({
     key: index + 1,
-    title: newsroom.name,
-    product: newsroom.Product.title, // Assuming productId is included in the newsroom object
-    id: newsroom.id,
+    title: newsroom?.name,
+    product: newsroom.Product?.title, 
+    id: newsroom?.id,
   }));
 
   return (

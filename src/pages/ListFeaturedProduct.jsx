@@ -48,12 +48,12 @@ const ListFeaturedProduct = () => {
             {featuredProducts?.map((featuredProduct, index) => (
               <tr key={featuredProduct.id}>
                 <td>{index + 1}</td>
-                <td>{featuredProduct.Product.title}</td>
-                <td>{featuredProduct.Product.description}</td>
+                <td>{featuredProduct.Product?.title}</td>
+                <td>{featuredProduct.Product?.description}</td>
                 <td>
                   <img
-                    src={featuredProduct.Product.image}
-                    alt={featuredProduct.Product.title}
+                    src={featuredProduct.Product?.image}
+                    alt={featuredProduct.Product?.title}
                     style={{ width: '100px', height: 'auto' }}
                   />
                 </td>

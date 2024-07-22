@@ -11,14 +11,14 @@ const createProduct = async (product) => {
   const response = await axios.post(`${base_url_brand}/createProducts`, product);
   return response.data;
 };
-const updateProduct = async (product) => {
-  const response = await axios.put(`${base_url_brand}/`, product);
+const updateProduct = async (id , product) => {
+  const response = await axios.put(`${base_url_brand}/updateProduct/${id}`, product);
 console.log(response.data)
   return response.data;
 };
 const getProduct = async (id) => {
   const response = await axios.get(
-    `${base_url_brand}product/${id}`,
+    `${base_url_brand}/product/${id}`,
     "",
     config
   );
@@ -34,6 +34,7 @@ const getProduct = async (id) => {
     return response.data;
   
     }
+
 const productService = {
   getProducts,
   createProduct,

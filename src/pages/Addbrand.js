@@ -13,7 +13,7 @@ const MarketForm = () => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setImage(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -50,9 +50,10 @@ const MarketForm = () => {
         <div className="form-group">
           <label htmlFor="image">Brand Image</label>
           <input
-            type="file"
+            type="text"
             className="form-control"
             id="image"
+            value={image}
             onChange={handleImageChange}
             required
           />
