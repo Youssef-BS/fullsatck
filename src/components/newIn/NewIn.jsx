@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetFeaturedProduct } from '../../Features/Newsroom/newsSlices';
 import { GetAllProducts, GetMarkets } from '../../Features/Product/ProductSlice';
 import { Typography } from '@mui/material'; // Importing Material-UI components
-
-// Importing Material-UI Icons
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useTranslation } from 'react-i18next';
 
 const ProductBox = () => {
   const dispatch = useDispatch();
   const FeaturedP = useSelector((state) => state?.news?.FeaturedP);
   const MarketState = useSelector((state) => state?.product?.Markets);
   const ProductState = useSelector((state) => state?.product?.Products);
+  const { t } = useTranslation();
 
   const [activeMarket, setActiveMarket] = useState(null);
 
@@ -23,14 +23,11 @@ const ProductBox = () => {
     dispatch(GetMarkets());
     dispatch(GetAllProducts());
   }, [dispatch]);
-  
-  console.log("yeahh" , FeaturedP , MarketState , ProductState);
 
   const handleMarketClick = (market) => {
     setActiveMarket(market.id);
   };
 
-  
   const settings = {
     dots: true,
     arrows: true,
@@ -124,8 +121,7 @@ const ProductBox = () => {
     cssEase: 'linear',
   };
 
-  // Filter and limit products based on active market
-  const filteredProducts = ProductState?.filter(product => product.marketId === activeMarket).slice(0, 4) || [];
+  const filteredProducts = ProductState?.filter(product => product.MarketId === activeMarket).slice(0, 4) || [];
   const firstBlock = filteredProducts.slice(0, 2);
   const secondBlock = filteredProducts.slice(2, 4);
 
@@ -136,7 +132,7 @@ const ProductBox = () => {
           <div className="row no-gutters">
             <div className="col-xl-6">
               <div className="new-in new-in-featured__box">
-                <Typography variant="h2" className="new-in-featured__title">New In</Typography>
+                <h2 className="new-in-featured__title">{t('newIn')}</h2>
                 <div className="ajax-carousel-container">
                   <div className="actions">
                     {MarketState?.map((market) => (
@@ -154,28 +150,28 @@ const ProductBox = () => {
                       <div className="row productboxwrap pb-0 ml- mr-0">
                         <div className="col-12">
                           <div className="container pl-2 pr-2">
-                            <Slider {...settings}>
-                              {firstBlock.map((product) => (
-                                <div key={product.id} style={{ flex: '1 0 48%', boxSizing: 'border-box', padding: '10px' }}>
-                                  <Link to={`/ProductDetail/${product.id}`} tabIndex="-1">
-                                    <div>
+                            <div className="slides" style={{ display: 'flex', overflowX: 'hidden', transition: 'transform 0.5s ease' }}>
+                              <Slider {...settings}>
+                                {firstBlock.map((product) => (
+                                  <Link to={`/ProductDetail/${product.id}`} tabIndex="-1" key={product.id}>
+                                    <div style={{ flex: '1 0 48%', boxSizing: 'border-box', padding: '10px' }}>
                                       <div className="product-box" data-id={product.id} data-quantity="YOUR_PRODUCT_QUANTITY" data-price="YOUR_PRODUCT_PRICE">
                                         <div className="product-box__img">
                                           <img src={product.image} alt={product.title} className="lazy-scroll loaded" />
                                         </div>
                                         <div className="product-box__title">
-                                          <Typography variant="body1">{product.title}</Typography>
+                                          <span>{product.title}</span>
                                         </div>
                                         <div className="product-box__code">
                                           <div className="product-box__code">{product.id}</div>
                                         </div>
-                                        <Typography variant="body2" className="product-box__desc">{product.description}</Typography>
+                                        <p className="product-box__desc">{product.description}</p>
                                       </div>
                                     </div>
                                   </Link>
-                                </div>
-                              ))}
-                            </Slider>
+                                ))}
+                              </Slider>
+                            </div>
                             {secondBlock.length > 0 && (
                               <Slider {...settings}>
                                 {secondBlock.map((product) => (
@@ -227,7 +223,7 @@ const ProductBox = () => {
                         </div>
                         <Typography variant="body2" className="product-box__desc">{product.Product.description}</Typography>
                         <Link to={`/ProductDetail/${product.Product.id}`} className="btn btn-secondary btn-primary-white">
-                          <span>View details</span>
+                          <span>{t('viewDetails')}</span>
                         </Link>
                       </div>
                     </div>

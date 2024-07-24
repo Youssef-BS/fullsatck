@@ -96,7 +96,7 @@ dispatch(removeProductFromWishlist({wishlistId,productId}))
                                           </div>
                                           <div width="96" className="centerit productImageCart">
                                           <Link to={`/ProductDetail/${wishlistProduct.Product.id}`}>
-                                                  <img src={wishlistProduct.Product.image} border="0" title="IWM-200" alt="IWM-200" />
+                                                  <img src={wishlistProduct.Product.image} style={{ width: '75px', height: '75px', borderRadius: '100%' }} border="0" title="IWM-200" alt="IWM-200" />
                                               </Link>
                                           </div>
                                           <div className="productTitleCart">

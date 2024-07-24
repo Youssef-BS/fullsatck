@@ -3,6 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { GetAll, GetAllProducts,GetMarkets } from '../../Features/Product/ProductSlice';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Check, MonetizationOn } from '@mui/icons-material';
+import { BsChevronRight } from "react-icons/bs";
 
 
 const SideMenu = ({ isOpen,isopen2,onClose }) => {
@@ -223,7 +224,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
               <div className="first-level">
                   <ul>
                       {Side?.map((market) => (
-                          <li
+                          <li style={{display:'flex',alignItems:'center'}}
                               key={market.id}
                               className={`has-children menu-item jsFirstLevelMenuItem ${showSubMenu ? 'second-level-container' : ''} ${
                                   market.id === activeMarket ? 'active' : ''
@@ -237,17 +238,19 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                               >
                                   <img className="img-fluid" src={market.image} alt={market.name} />
                                   {market.name}
+                                  <ChevronRight
+                  className="las la-angle-right"
+                  data-href="https://www.fos-lighting.eu/active-speakers-c-173_97.html"
+                  onClick={toggleThirdLevel}
+                />
                               </a>
-                              <ChevronRight
-                                  className={`las la-angle-right op-50`}
-                                  data-href="https://www.fos-lighting.eu/intelligent-audio-c-173.html"
-                              />
+                              
                               {showSubMenu && market.id === activeMarket && (
                                   <ul className="second-level" style={{ display: showSubMenu ? 'block' : 'none' }}>
                                       <ul className="inner-second" style={{ maxHeight: '571px' }}>
                                           {Side?.find((m) => m.id == activeMarket)?.Categories?.map((category) => {
                                               return (
-                                                  <li
+                                                  <li style={{display:'flex',alignItems:'center'}}
                                                       key={category.id}
                                                       className={`menu-item has-children third-level-container ${
                                                           category.id === activeCategory ? 'active' : ''
@@ -260,7 +263,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                       >
                                                           {category.name}
                                                       </a>
-                                                      <ChevronRight
+                                                      <ChevronRight 
                                                           className={`las la-angle-right`}
                                                           data-href="https://www.fos-lighting.eu/active-speakers-c-173_97.html"
                                                           onClick={toggleThirdLevel}
@@ -273,7 +276,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                               <ul className="inner-third" style={{ maxHeight: '571px' }}>
                                                                   {category.Subcategories.length > 0 ? (
                                                                       category.Subcategories.map((subcategory) => (
-                                                                          <li
+                                                                          <li style={{display:'flex',alignItems:'center'}}
                                                                               key={subcategory.id}
                                                                               className={`menu-item ${
                                                                                   subcategory.id === activeSub ? 'active' : ''

@@ -223,7 +223,7 @@ const MainHeader = () => {
                                             <div className="caption">0.00€</div>
                                         </div>
                                         {showCart && (
-                    <Cart/>
+                    <Cart closeCart={toggleCart}/>
                 )}
                                         <div className="clear"></div>
                                     </div>

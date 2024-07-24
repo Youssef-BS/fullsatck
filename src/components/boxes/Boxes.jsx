@@ -70,13 +70,14 @@ const CategoryBox = () => {
             <div className="col-xl-6 mb-4">
             <div className="category-box">
               <div className="category-box__left">
-                <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html" className="category-box__image-wrapper">
-                  <img className="category-box__image" src="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" alt="Intelligent Lighting Technology" />
-                </a>
+              <Link to={`/explore/${market.id}`} className="category-box__image-wrapper">
+                    <img className="category-box__image" src="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" alt="Intelligent Lighting Technology" />
+                  </Link>
                 <h2 className="category-box__title">{market.name}</h2>
                 <div className="category-box__text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</div>
-                <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html" className="btn btn-primary-gray btn-big-fn18 category-box__btn">Explore</a>
-              </div>
+                <Link to={`/explore/${market.id}`} className="btn btn-primary-gray btn-big-fn18 category-box__btn">
+                    Explore
+                  </Link>              </div>
               <div className="category-box__right">
                 <Slider {...settings}>
                   {ProductState?.map((product)=>(

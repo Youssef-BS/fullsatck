@@ -64,8 +64,17 @@ import Store from './Pages/Store';
                     path="/log-off"
                     element={<Layout><LogOffPage /></Layout>}
                 />
+               
                 <Route
-                    path="/explore"
+                    path="/explore/:marketId"
+                    element={<Layout><Explore /></Layout>}
+                />
+                 <Route
+                    path="/explore/:marketId/:categoryId"
+                    element={<Layout><Explore /></Layout>}
+                />
+                 <Route
+                    path="/explore/:marketId/:categoryId/:subCategoryId"
                     element={<Layout><Explore /></Layout>}
                 />
                 <Route

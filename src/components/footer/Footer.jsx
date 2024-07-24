@@ -1,8 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import ScrollToTop from '../scrollToTop/ScrollToTop';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <>
     <div className="footer py-3 py-lg-5">
@@ -17,15 +20,15 @@ const Footer = () => {
                   <path d="M9.156 16.327a2.767 2.767 0 012.755 2.751v9.894a2.767 2.767 0 01-2.755 2.751 2.767 2.767 0 01-2.756-2.75v-9.85c-.045-1.553 1.2-2.796 2.756-2.796zM4.667 19.123v9.76a5.691 5.691 0 01-2.934-4.968 5.638 5.638 0 012.934-4.97v.178zM20.089 40.464c-1.289 0-2.045-.577-2.045-.887 0-.31.8-.888 2.045-.888 1.289 0 2.045.577 2.045.888.044.31-.756.887-2.045.887zM30.711 31.768a2.767 2.767 0 01-2.755-2.75v-9.895a2.767 2.767 0 012.755-2.75 2.767 2.767 0 012.755 2.75v9.894a2.767 2.767 0 01-2.755 2.751zM35.156 28.973V18.857a5.665 5.665 0 013.11 5.058 5.665 5.665 0 01-3.11 5.058z"/>
                 </g>
               </svg>
-              <h2>Need help?</h2>
-              <h4>Our team is here for you</h4>
+              <h2>{t('needHelp')}</h2>
+                <h4>{t('ourTeamIsHere')}</h4>
             </div>
             <div className="menu-right">
               <p className="text-center">
-                <a className="mb-0 mail-link" href="mailto:support@fos-lighting.eu">support@fos-lighting.eu</a>
+                <a className="mb-0 mail-link" href="mailto:support@fos-lighting.eu">{t('supportEmail')}</a>
               </p>
               <p className="home-boxes__divider">Or</p>
-              <Link to="/Support" target="_blank" className="btn btn-outline btn-outline--orange btn-big-fn18 w-100">Support</Link>
+              <Link to="/Support" target="_blank" className="btn btn-outline btn-outline--orange btn-big-fn18 w-100">{t('supportButton')}</Link>
             </div>
           </div>
           {/* Dealer Section */}
@@ -37,14 +40,14 @@ const Footer = () => {
                   <path d="M27.972 8.436c-3.519 3.35-6.243 4.603-6.359 4.656l-.022.008c-.525.168-1.15.256-1.808.256-.835 0-1.525-.138-1.863-.257-.682-.24-1.844-1.369-2.346-2.278-.517-.937-.068-2.355-.047-2.415l.016-.053 7.723-7.33c-.37-.37-1.104-.559-2.186-.559-2.95 0-7.415 1.435-7.665 1.517-.337.15-.825.226-1.45.226-1.117 0-2.33-.237-2.524-.275h-.006C8.78 1.932 7.064.895 6.788.725c-.28-.099-.547-.15-.79-.15-.66 0-.971.37-1.03.446L1.247 9.57C.077 11.78-.008 12.425.002 12.589c2.044.5 4.754 3.454 5.427 4.218l3.875-3.81.062-.013c.33-.07.647-.106.945-.106 2.382 0 3.05 2.214 3.201 2.917a5.83 5.83 0 01.569-.029c2.82 0 3.407 2.272 3.525 3.047a5.64 5.64 0 011.113-.12c2.586 0 3.181 2.185 3.308 2.92 1.36-.207 2.408.086 3.109.864 1.116 1.233.942 3.231.934 3.315l-.007.078-3.837 3.921c.536.288 1.046.432 1.519.432 1.898 0 2.725-2.351 2.733-2.376l.06-.175.182.033c.317.057.62.086.898.086 2.564 0 2.696-2.436 2.7-2.539l.012-.27.26.068a5.74 5.74 0 001.43.201c2.67 0 2.938-2.531 2.947-2.638l.023-.237.233.043c.396.075.766.112 1.1.112.893 0 1.563-.267 1.99-.793.826-1.015.529-2.678.511-2.774-.7-2.804-9.6-9.585-10.852-10.528z"></path>
                 </g>
               </svg>
-              <h2>Become a Dealer</h2>
+              <h2>{t('becomeDealer')}</h2>
             </div>
             <div className="menu-right">
               <p>
-                <b>Work with us</b><br />
-                Be a partner in growth
+                <b>{t('workWithUs')}</b><br />
+                {t('workwith')}
               </p>
-              <Link to="/create-account" className="btn btn-primary-black-text btn-big-fn18 w-100">Create Account</Link>
+              <Link to="/create-account" className="btn btn-primary-black-text btn-big-fn18 w-100">{t('createAccountButton')}</Link>
             </div>
           </div>
           {/* Sales Team Section */}
@@ -65,14 +68,13 @@ const Footer = () => {
                   </g>
                 </g>
               </svg>
-              <h2>Contact our Sales Team</h2>
+              <h2>{t('contactSalesTeam')}</h2>
             </div>
             <div className="menu-right">
               <p>
-                <b>We are all ears</b><br />
-                We would like to hear from you
+                <b>{t('weAreAllEars')}</b><br />
               </p>
-              <Link to="/CntactsUs" className="btn btn-outline btn-outline--orange btn-big-fn18 w-100">Get In Touch</Link>
+              <Link to="/CntactsUs" className="btn btn-outline btn-outline--orange btn-big-fn18 w-100">{t('getInTouchButton')}</Link>
             </div>
           </div>
         </div>
@@ -82,14 +84,14 @@ const Footer = () => {
       <div className="container-fluid">
         <div className="row align-items-center">
           <div className="col-6 col-lg text-left order-1 order-lg-1">
-            <a href="https://www.fos-lighting.eu/cookies.php">Cookies Policy</a>
+            <a href="https://www.fos-lighting.eu/cookies.php">{t('cookiesPolicy')}</a>
           </div>
           <div className="col-12 col-lg-auto text-center footer-copyright__center-column mt-3 mt-lg-0 copy order-10 order-lg-1">
-            <span className="copyright-text">Copyright © 2024 - All Rights Reserved.</span>
-            <span className="web-develop-text">Designed and developed by <a href="#" title="web-experts.gr" target="_blank" rel="nofollow">WLA</a><img className="ml-2" src="https://www.fos-lighting.eu/images/web-experts-copyright.png" /></span>
+            <span className="copyright-text">{t('copyright')}</span>
+            <span className="web-develop-text">{t('webDevelopedBy')} <a href="#" title="web-experts.gr" target="_blank" rel="nofollow">WLA</a><img className="ml-2" src="https://www.fos-lighting.eu/images/web-experts-copyright.png" /></span>
           </div>
           <div className="col-6 col-lg text-right order-1 order-lg-1">
-            <a href="https://www.fos-lighting.eu/gdpr.php">Privacy Policy</a>
+            <a href="https://www.fos-lighting.eu/gdpr.php">{t('privacyPolicy')}</a>
           </div>
         </div>
       </div>

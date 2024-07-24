@@ -26,6 +26,10 @@ const InfoBar = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    prevArrow: <div className="slick-prev">Prev</div>,
+    nextArrow: <div className="slick-next" style={{ right: '-2px !important' }}>Next</div>,
  
   };
 
