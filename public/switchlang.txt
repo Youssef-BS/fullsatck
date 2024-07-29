@@ -2,4 +2,9 @@ header,
 accountinfo,
 footer,
 new,
-newIn
+newIn,
+newsroom,
+sidemenu,
+cart,
+search,
+

@@ -59,7 +59,7 @@
   "orderNumber": "Order Number:",
   "orderDate": "Order Date:",
   "orderStatus": "Order Status:",
-  "products": "Products:",
+  "products": "Products",
   "orderCost": "Order Cost:",
   "showing": "Showing",
   "to": "to",
@@ -91,7 +91,30 @@
   "newIn": "New In",
   "newsroom": "Newsroom",
   "viewAllNews": "View all news",
-  "viewDetails": "View details"
+  "viewDetails": "View details",
+  "mainMenu": "Main Menu",
+  "viewCategory": "View Category",
+  "category" : "Category",
+  "stageLighting": "Stage Lighting",
+  "staticLed": "Static Led",
+  "fosTechnologies": "FOS Technologies",
+  "offers": "Offers",
+  
+  "aboutUs": "About Us",
+  "contactUs": "Contact Us",
+
+  "yourCartIsEmpty": "Your cart is empty.",
+  "price": "Price",
+  "total": "Total",
+  "shoppingCart": "Shopping cart",
+  "checkout": "Checkout",
+  "search_products": "Search Products",
+  "search_with_product_name": "Search with product name or model",
+  "product_results": "Product Results:",
+  "no_results_found": "No result found with these criteria",
+  "advanced_search": "Advanced search",
+  "wishlist": "Wishlist",
+  "search": "Search"
 
   }
   

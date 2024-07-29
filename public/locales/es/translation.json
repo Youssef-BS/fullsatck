@@ -59,7 +59,7 @@
   "orderNumber": "Número de Pedido:",
   "orderDate": "Fecha del Pedido:",
   "orderStatus": "Estado del Pedido:",
-  "products": "Productos:",
+  "products": "Productos",
   "orderCost": "Costo del Pedido:",
   "showing": "Mostrando",
   "to": "a",
@@ -91,7 +91,29 @@
   "newIn": "Novedades",
   "newsroom": "Sala de noticias",
   "viewAllNews": "Ver todas las noticias",
-  "viewDetails": "Ver detalles"
+  "viewDetails": "Ver detalles",
+  "mainMenu": "Menú Principal",
+  "viewCategory": "Ver Categoría",
+  "category" : "Categoría",
+
+  "stageLighting": "Iluminación de Escenario",
+  "staticLed": "LED Estático",
+  "fosTechnologies": "FOS Technologies",
+  "offers": "Ofertas",
+  "aboutUs": "Sobre Nosotros",
+  "contactUs": "Contáctenos",
+  "yourCartIsEmpty": "Tu carrito está vacío.",
+  "price": "Precio",
+  "total": "Total",
+  "shoppingCart": "Carrito de Compras",
+  "checkout": "Pagar",
+  "search_products": "Buscar productos",
+  "search_with_product_name": "Buscar por nombre o modelo del producto",
+  "product_results": "Resultados de productos:",
+  "no_results_found": "No se encontraron resultados con estos criterios",
+  "advanced_search": "Búsqueda avanzada",
+  "wishlist": "Lista de deseos",
+  "search": "Buscar"
 
   }
   

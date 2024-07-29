@@ -124,6 +124,8 @@ const HeaderComponent = () => {
               <Link to="/create-account">{t('become_a_dealer')}</Link>
               <span>⋅</span>
               <Link to="/projects" className="more">{t('projects')}</Link>
+              <Link to="/compare" className="more">Compare</Link>
+
               <span>⋅</span>
               <div className="header-links__submenu dropdown">
                 <a href="#" className="dropdown-toggle" onClick={toggleDropdown}>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
+import { useTranslation } from 'react-i18next';
 
 const Cart = ({ closeCart }) => {
   const userId = 1;
@@ -10,6 +11,7 @@ const Cart = ({ closeCart }) => {
   const updState = useSelector((state) => state.cart.upd);
   const [total, setTotal] = React.useState(0);
   const cartRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchCart(userId));
@@ -67,7 +69,7 @@ const Cart = ({ closeCart }) => {
     >
       {cartState[0]?.CartProducts.length === 0 ? (
         <div id="shopping-cart-items-wrapper">
-          <div className="centerit empty">Your cart is empty.</div>
+          <div className="centerit empty">{t('yourCartIsEmpty')}</div>
         </div>
       ) : (
         <div id="shopping-cart-items-wrapper">
@@ -89,7 +91,7 @@ const Cart = ({ closeCart }) => {
                   </div>
                   <div className="price_container">
                     <div className="price">
-                      <span>Price:</span>{item.Product.price}€
+                      <span>{t('price')}:</span>{item.Product.price}€
                     </div>
                     <div className="actionbar">
                       <span>
@@ -140,16 +142,16 @@ const Cart = ({ closeCart }) => {
             </div>
           </div>
           <div className="total total_amount">
-            <span>Total:</span>{total.toFixed(2)}€
+            <span>{t('total')}:</span>{total.toFixed(2)}€
           </div>
           <div className="goto">
             <Link to="/shopcart">
               <button type="button" className="shop-btn outline">
-                <span>Shopping cart</span>
+                <span>{t('shoppingCart')}</span>
               </button>
             </Link>
             <Link className="shop-btn has-icon right" to='/complete-order' id="gotocheckout">
-              Checkout<i className="las la-arrow-right"></i>
+              {t('checkout')}<i className="las la-arrow-right"></i>
             </Link>
           </div>
         </div>

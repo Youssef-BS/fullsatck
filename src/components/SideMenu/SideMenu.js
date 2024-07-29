@@ -4,10 +4,13 @@ import { GetAll, GetAllProducts,GetMarkets } from '../../Features/Product/Produc
 import { Link } from 'react-router-dom';
 import { ChevronRight, Check, MonetizationOn } from '@mui/icons-material';
 import { BsChevronRight } from "react-icons/bs";
+import { useTranslation } from 'react-i18next';
 
 
 const SideMenu = ({ isOpen,isopen2,onClose }) => {
   const Side = useSelector((state)=> state.product.All )
+  const { t } = useTranslation();
+
 
  
   const [SideMeState, setSideMeState] = useState(useSelector((state)=> state?.product?.All));
@@ -174,14 +177,14 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
     return (
       <>
       <nav id="ddfullscreenmenu" className={responsiveMob ? 'openmenu' : ''}>
-          <div className="mobile-title-menu">Main Menu</div>
+          <div className="mobile-title-menu">{t('mainMenu')}</div>
           <div id="closex" onClick={toggleMenuu}></div>
           <div id="ulwrapper">
               {/* Define your UL (nested) menu below */}
               <ul className="submenu" style={{ zIndex: 183 }}>
                   <li className="breadcrumb">FOS Technologies</li>
                   <li className="menu-view-all">
-                      <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html">View Category</a>
+                      <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html">{t('viewCategory')}</a>
                   </li>
                   <li className="header">
                       <a href="#">Stage Lighting</a>
@@ -205,16 +208,16 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                   </li>
                   */}
                   <li className="mobile-menu-item">
-                      <a href="https://www.fos-lighting.eu/news.php">Newsroom</a>
+                      <a href="https://www.fos-lighting.eu/news.php">{t('newsroom')}</a>
                   </li>
                   <li className="mobile-menu-item">
-                      <a href="projects.php">Projects</a>
+                      <a href="projects.php">{t('projects')}</a>
                   </li>
                   <li className="mobile-menu-item">
-                      <a href="who-we-are-pr-1.html">About us</a>
+                      <a href="who-we-are-pr-1.html">{t('aboutUs')}</a>
                   </li>
                   <li className="mobile-menu-item">
-                      <a href="https://www.fos-lighting.eu/contact_us.php">Contact us</a>
+                      <a href="https://www.fos-lighting.eu/contact_us.php">{t('contactUs')}</a>
                   </li>
               </ul>
           </div>
@@ -375,19 +378,21 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                   </ul>
                   <div className="tags-menu">
                       <span className="news">
-                          <a href="https://www.fos-lighting.eu/news.php">Newsroom</a>
+                          <a href="https://www.fos-lighting.eu/news.php">{t('newsroom')}</a>
                       </span>
                       <span className="account">
-                          <a href="https://www.fos-lighting.eu/create_account.php">Become a Dealer</a>
+                          <a href="https://www.fos-lighting.eu/create_account.php">{t('become_a_dealer')}</a>
                       </span>
                       <span className="projects">
-                          <a href="projects.php">Projects</a>
+                          <a href="projects.php">{t('projects')}</a>
                       </span>
                       <span className="about">
-                          <a href="who-we-are-pr-1.html">About us</a>
+                          <a href="who-we-are-pr-1.html">{t('aboutUs')}</a>
                       </span>
                       <span className="contact">
-                          <a href="https://www.fos-lighting.eu/contact_us.php">Contact us</a>
+                          <a href="https://www.fos-lighting.eu/contact_us.php">
+                            {t('contactUs')}
+                          </a>
                       </span>
                   </div>
               </div>

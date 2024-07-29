@@ -22,6 +22,7 @@ import ShoppingCart from './Pages/ShoppingCart';
 import CompleteOrder from './Pages/CompleteOrder';
 import OrderList from './Pages/wishlist';
 import Store from './Pages/Store';
+import CompareProduct from './Pages/CompareProducts';
 
 
 
@@ -76,6 +77,10 @@ import Store from './Pages/Store';
                  <Route
                     path="/explore/:marketId/:categoryId/:subCategoryId"
                     element={<Layout><Explore /></Layout>}
+                />
+                <Route 
+                path='/compare'
+                element={<Layout><CompareProduct /></Layout>}
                 />
                 <Route
                     path="/ProductDetail/:id"

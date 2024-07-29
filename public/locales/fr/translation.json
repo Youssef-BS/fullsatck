@@ -59,7 +59,7 @@
     "orderNumber": "Numéro de Commande :",
     "orderDate": "Date de Commande :",
     "orderStatus": "Statut de la Commande :",
-    "products": "Produits :",
+    "products": "Produits ",
     "orderCost": "Coût de la Commande :",
     "showing": "Affichage",
     "to": "à",
@@ -92,8 +92,31 @@
     "newIn": "Nouveautés",
     "newsroom": "Salle de presse",
   "viewAllNews": "Voir toutes les nouvelles",
-  "viewDetails": "Voir les détails"
-  
+  "viewDetails": "Voir les détails",
+  "mainMenu": "Menu Principal",
+  "viewCategory": "Voir la Catégorie",
+  "category" : "Catégorie",
+
+  "stageLighting": "Éclairage de Scène",
+  "staticLed": "LED Statique",
+  "fosTechnologies": "FOS Technologies",
+  "offers": "Offres",
+ 
+  "aboutUs": "À Propos de Nous",
+  "contactUs": "Nous Contacter",
+ 
+  "yourCartIsEmpty": "Votre panier est vide.",
+  "price": "Prix",
+  "total": "Total",
+  "shoppingCart": "Panier",
+  "checkout": "Commander",
+  "search_products": "Rechercher des produits",
+  "search_with_product_name": "Rechercher par nom ou modèle du produit",
+  "product_results": "Résultats des produits :",
+  "no_results_found": "Aucun résultat trouvé avec ces critères",
+  "advanced_search": "Recherche avancée",
+  "wishlist": "Liste de souhaits",
+  "search": "Recherche"
     
   }
   

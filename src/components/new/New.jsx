@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProjects, selectAllProjects } from '../../Features/project/projectSlice';
+import { useTranslation } from 'react-i18next';
 import './New.css';
 
 function New() {
@@ -12,6 +13,7 @@ function New() {
   const isLoading = useSelector((state) => state.projects.isLoading);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchProjects());
@@ -46,7 +48,7 @@ function New() {
   return (
     <div className="image-mapper-container">
       {isLoading ? (
-        <div>Loading projects...</div>
+        <div>{t('loadingProjects')}</div>
       ) : (
         <Slider ref={sliderRef} {...settings}>
           {projects?.map((project, index) => (
@@ -56,22 +58,21 @@ function New() {
                   <div className="col-lg-5 col-xl-5 col-md-12 text">
                     <div className="wrap inner pt-10 pb-10 pr-5 pl-5">
                       <div className="projects-title-cont">
-                        <h2>Our Projects</h2>
+                        <h2>{t('ourProjects')}</h2>
                         <Link to="/projects" className="more">
-                          View all projects
+                          {t('viewAllProjects')}
                         </Link>
                       </div>
                       <h1>{project.title}</h1>
                       <p>{project.description}</p>
                       <div className="btn-container">
                         <Link to={`/project-select/${project.id}`} className="btn btn-primary-gray btn-big mt-4">
-                          Learn More
+                          {t('learnMore')}
                         </Link>
                       </div>
                       <div className="arrows-notification">
                         <div className="notification">
-                          Click the <ArrowForwardIos className="icon" /> button to view more about the products used in this
-                          project
+                          {t('clickArrowButton')} <ArrowForwardIos className="icon" /> {t('viewMoreProducts')}
                         </div>
                       </div>
                     </div>

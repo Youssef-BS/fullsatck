@@ -7,7 +7,7 @@ import projectReducer from "../Features/project/projectSlice";
 import cartSliceReducer from '../Features/cart/cartSlice'
 import wshlistSliceReducer from '../Features/wishlist/wishlistSlice'
 import projectProductReducer from "../Features/projectProduct/projectProductSlice";
-
+import compareReducer from "../Features/compare/compareSlice"
 export const store = configureStore({
   reducer: {
     product: productReducer,
@@ -17,7 +17,8 @@ export const store = configureStore({
     projects: projectReducer,
     wishlist : wshlistSliceReducer,
     cart : cartSliceReducer,
-    projectProduct : projectProductReducer
+    projectProduct : projectProductReducer,
+    compare  : compareReducer
 
   },
 });

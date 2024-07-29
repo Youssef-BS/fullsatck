@@ -15,7 +15,6 @@ const NextArrow = (props) => {
       onClick={onClick} 
       style={{ 
         zIndex: 1, 
-        backgroundColor: '#383838', 
         borderRadius: '100%', 
         width: '75px', 
         height: '75px', 

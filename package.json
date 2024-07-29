@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/slick-carousel": "^1.6.40",
     "css-loader": "^6.10.0",
     "postcss-loader": "^8.1.1",

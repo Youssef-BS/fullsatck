@@ -6,19 +6,27 @@ import { useDispatch,useSelector } from 'react-redux';
 import Cart from './Cart';
 import { Link } from 'react-router-dom';
 import { Search } from '../Features/Product/ProductSlice';
+import { t, use } from 'i18next';
 const MainHeader = () => {
     const [isInputEmpty, setIsInputEmpty] = useState(false);
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [wishlist,setWishlist]= useState(0)
     const searchState = useSelector((state)=> state?.product?.Search)
-    console.log(searchState)
+    const WishlistState = useSelector((state)=> state?.wishlist?.wishlists)
+
+        console.log(WishlistState[0]?.WishlistProducts?.length)
+        console.log(WishlistState)
+
     const dispatch = useDispatch()
     useEffect(()=>{
       dispatch(Search(query))
       setSearchResults(searchState)
     },[query])
-  
+  useEffect(()=>{
+    setWishlist(WishlistState[0]?.WishlistProducts?.length)
+  },[WishlistState])
     const handleSearch = async () => {
         setIsLoading(true);
     }
@@ -73,10 +81,10 @@ const MainHeader = () => {
                             <div className="col-auto button menu">
                                 {isMenuOpen ?<a href="#" className="menu-open clicked"onClick={toggleMenu}>
                                 <GoX className="las la-bars" style={{ fontSize: '25px', position: 'absolute', left: '10px', height: '25px', top: '50%', transform: 'translateY(-50%)' }} />
-                                    <span >Products</span>
+                                    <span >{t('products')}</span>
                                 </a> :<a href="#" className="menu-open clicked"onClick={toggleMenu}>
                                 <FiMenu className="las la-bars" style={{ fontSize: '25px', position: 'absolute', left: '10px', height: '25px', top: '50%', transform: 'translateY(-50%)' }} />
-                                    <span >Products</span>
+                                    <span >{t('products')}</span>
                                 </a> }
                                 
                             </div>
@@ -114,8 +122,8 @@ const MainHeader = () => {
                             {/* Add other search-related elements here */}
                             <div className={`acresults ${isOpen ? 'search--open ' : ''}`} id="acresults" style={{ display: isOpen ? 'block' : 'none' }}> 
             <div className="search-title">
-                <h3>Search Products</h3>
-                <p>Search with product name or model</p>
+                <h3>{t('search_products')}</h3>
+                <p>{t('search_with_product_name')}</p>
             </div>
             <div className="search-container inner txt-c clearfix search--open" id="search-container">
         <div className="search search__form" id="search_bar">
@@ -138,7 +146,7 @@ const MainHeader = () => {
         <div key={index} className="ac_result_item">
             <a href={`https://www.fos-lighting.eu/${product?.Category?.name}`}>
                 <div className="description">
-                    <div className="title">Category: {product?.Category?.name}</div>
+                    <div className="title">{t('category')}: {product?.Category?.name}</div>
                 </div>
             </a>
           
@@ -146,7 +154,7 @@ const MainHeader = () => {
     ))}
 </div>
                     <div className="show_ac_results_title products" id="show_ac_results_title_products">
-                        <h2 className="main-title" style={{ margin: '0' }}>Product Results:</h2>
+                        <h2 className="main-title" style={{ margin: '0' }}>{t('product_results')}:</h2>
                     </div>
                     <div className="show_ac_results_products" id="show_ac_results_products">
        
@@ -168,9 +176,9 @@ const MainHeader = () => {
                         ))}
         <div style={{ clear: 'both' }}></div>
       </div>
-      { searchResults.length>0 ?"":                    <div className="noresults">No result found with these criteria <i className="las la-frown"></i></div>}
+      { searchResults.length>0 ?"":                    <div className="noresults">{t('no_results_found')}<i className="las la-frown"></i></div>}
                     
-                    <a className="view-all-search text-center mt-3 mb-3 d-block" href="#">Advanced search <i className="las la-cog"></i></a>
+                    <a className="view-all-search text-center mt-3 mb-3 d-block" href="#">{t('advanced_search')} <i className="las la-cog"></i></a>
                 </div>
             </div>
         </div>
@@ -184,7 +192,7 @@ const MainHeader = () => {
                                     <div className="col-auto icon d-none">
                                         <div id="not-logged" className="login">
                                             <a href="#" id="login-popup-link" className="login-popup-link">
-                                                <span>Login / Register</span>
+                                                <span>{t('login_register')}</span>
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12.877 2.62891C7.35695 2.62891 2.87695 7.10891 2.87695 12.6289C2.87695 18.1489 7.35695 22.6289 12.877 22.6289C18.397 22.6289 22.877 18.1489 22.877 12.6289C22.877 7.10891 18.397 2.62891 12.877 2.62891ZM12.877 5.62891C14.537 5.62891 15.877 6.96891 15.877 8.62891C15.877 10.2889 14.537 11.6289 12.877 11.6289C11.217 11.6289 9.87695 10.2889 9.87695 8.62891C9.87695 6.96891 11.217 5.62891 12.877 5.62891ZM12.877 19.8289C10.377 19.8289 8.16695 18.5489 6.87695 16.6089C6.90695 14.6189 10.877 13.5289 12.877 13.5289C14.867 13.5289 18.847 14.6189 18.877 16.6089C17.587 18.5489 15.377 19.8289 12.877 19.8289Z" fill="#454852"></path>
                                                 </svg>
@@ -197,7 +205,7 @@ const MainHeader = () => {
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="19" viewBox="0 0 22 19" fill="none">
           <path d="M6.125 0.75C3.02246 0.75 0.5 3.30176 0.5 6.375C0.5 7.44727 0.986328 8.37598 1.4375 9.04688C1.88867 9.71777 2.35156 10.1484 2.35156 10.1484L10.4609 18.2812L11 18.8203L11.5391 18.2812L19.6484 10.1484C19.6484 10.1484 21.5 8.5166 21.5 6.375C21.5 3.30176 18.9775 0.75 15.875 0.75C13.2998 0.75 11.6416 2.2998 11 2.95312C10.3584 2.2998 8.7002 0.75 6.125 0.75ZM6.125 2.25C8.36621 2.25 10.4375 4.42969 10.4375 4.42969L11 5.0625L11.5625 4.42969C11.5625 4.42969 13.6338 2.25 15.875 2.25C18.1572 2.25 20 4.12207 20 6.375C20 7.53223 18.5938 9.09375 18.5938 9.09375L11 16.6875L3.40625 9.09375C3.40625 9.09375 3.04297 8.74512 2.67969 8.20312C2.31641 7.66113 2 6.95508 2 6.375C2 4.12207 3.84277 2.25 6.125 2.25Z" fill="#000"></path>
         </svg>
-        <div className="wishlist-number">40</div>
+        <div className="wishlist-number">{wishlist}</div>
       </Link>
     </div>
     <div className="col-auto icon search">
