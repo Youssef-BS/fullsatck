@@ -23,6 +23,9 @@ import CompleteOrder from './Pages/CompleteOrder';
 import OrderList from './Pages/wishlist';
 import Store from './Pages/Store';
 import CompareProduct from './Pages/CompareProducts';
+import VerificationCode from './Pages/VerificationCode';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -39,6 +42,7 @@ import CompareProduct from './Pages/CompareProducts';
     };
     const App = () => {
     return (
+        <>
         <Router>
             <Routes>
                 <Route
@@ -115,6 +119,8 @@ import CompareProduct from './Pages/CompareProducts';
                 />
             </Routes>
         </Router>
+        <ToastContainer />
+        </>
     );
 };
 

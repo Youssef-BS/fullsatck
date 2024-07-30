@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { base_url } from "../../utils/baseUrl";
 
+
 const login = async (user) => {
   try {
     const response = await axios.post(`${base_url}/login`, user);
@@ -28,6 +29,17 @@ const register = async (userData) => {
   }
 };
 
+const verificationEmail = async (verificationCode , token) => {
+  try {
+    const response = await axios.post(`${base_url}/verify/${token}`, {verificationCode});
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "verification failed");
+  }
+};
+
+
+
 const getCurrentUser = () => {
   const userData = Cookies.get("user");
   try {
@@ -42,6 +54,7 @@ const authService = {
   login,
   register,
   getCurrentUser,
+  verificationEmail
 };
 
 export default authService;

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import authService from "./authServices";
 import Cookies from "js-cookie";
 
@@ -8,6 +9,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
+  verificationEmail : false 
 };
 
 export const login = createAsyncThunk(
@@ -17,7 +19,21 @@ export const login = createAsyncThunk(
       const response = await authService.login(userData);
       return response;
     } catch (error) {
-      throw new Error(error.message);
+      toast.error(error.message); // Display error message as toast
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const verificationEmail = createAsyncThunk(
+  "/verificationEmail",
+  async ({verificationCode , token}, thunkAPI) => {
+    try {
+      const response = await authService.verificationEmail(verificationCode , token);
+      return response;
+    } catch (error) {
+      toast.error(error.message); // Display error message as toast
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -29,7 +45,8 @@ export const register = createAsyncThunk(
       const response = await authService.register(userData);
       return response;
     } catch (error) {
-      throw new Error(error.message);
+      toast.error(error.message); // Display error message as toast
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -51,7 +68,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.error.message || "An error occurred";
+        state.message = action.payload || "An error occurred";
       })
       .addCase(register.pending, (state) => {
         state.isLoading = true;
@@ -64,7 +81,20 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.error.message || "An error occurred";
+        state.message = action.payload || "An error occurred";
+      })
+      .addCase(verificationEmail.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verificationEmail.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.verificationEmail = true;
+      })
+      .addCase(verificationEmail.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || "An error occurred";
       });
   },
 });
@@ -74,7 +104,8 @@ export const logout = createAsyncThunk("/logout", async (_, thunkAPI) => {
     Cookies.remove("user");
     return null;
   } catch (error) {
-    throw new Error(error.message);
+    toast.error(error.message); // Display error message as toast
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 

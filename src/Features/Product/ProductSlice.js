@@ -7,6 +7,7 @@ const initialState = {
   Search: [],
   Product: null,
   All: [],
+  Accesory : [] ,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -23,6 +24,17 @@ export const GetAll = createAsyncThunk(
     }
   }
 );
+
+export const getAccesoryByProduct = createAsyncThunk(
+  "product/get-accesory-by-product",
+  async (productId, thunkAPI) => {
+    try {
+      return await AuthProduct.getAccesoryByProduct(productId);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+)
 
 export const GetProductById = createAsyncThunk(
   "product/get-pro",
@@ -95,6 +107,22 @@ export const ProductSlice = createSlice({
         state.message = "success";
       })
       .addCase(GetAll.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getAccesoryByProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAccesoryByProduct.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.Accesory = action.payload;
+        state.message = "success";
+      })
+      .addCase(getAccesoryByProduct.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
