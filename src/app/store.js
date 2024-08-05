@@ -17,6 +17,7 @@ import projectReducer from "../features/project/projectSlice";
 import projectProductReducer from "../features/projectProduct/projectProductSlice";
 import newsroomReducer from "../features/newsRoom/newsroomSlice";
 import featuredProductReducer from "../features/featuredProduct/featuredProductSlice";
+import ordersReducer from "../features/order/orderSlice"
 
 export const store = configureStore({
   reducer: {
@@ -38,5 +39,6 @@ export const store = configureStore({
     projectProduct : projectProductReducer,
     newsroom: newsroomReducer,
     featuredProduct: featuredProductReducer,
+    orders : ordersReducer
   },
 });
