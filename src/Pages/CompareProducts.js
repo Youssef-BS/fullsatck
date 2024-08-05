@@ -6,8 +6,12 @@ import { removeProductFromCompare, clearCompareProducts, addProductToCompare } f
 const CompareProduct = () => {
   const compareProducts = useSelector((state) => state?.compare?.compareProducts);
   const dispatch = useDispatch();
+  let len = null
 
   useEffect(() => {
+     len = compareProducts.length
+
+
     const savedCompareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
     savedCompareProducts.forEach(product => dispatch(addProductToCompare(product)));
   }, [dispatch]);
@@ -35,13 +39,14 @@ const CompareProduct = () => {
             <div className="section-bg-w-br-30">
               <div id="wishlist_dynamic_content" className="mainwrap wishlist_dynamic_content mt-3 mb-5">
                 <div className="headingtitle">
-                  <h1>Order List</h1>
+                  <h1>Compare</h1>
                 </div>
                 <div className="compare-product-wrapper py-5 home-wrapper-2">
                   <div className="row justify-content-center">
                     {compareProducts.map((product, index) => (
-                      <div key={`${product.id}-${index}`} className="col-12 col-md-6 "> 
-                        <div className="compare-product-card position-relative">
+                      
+        <div key={`${product.id}-${index}`} className={`col-12 ${len == 0 ? '' : 'col-md-6'}`}>
+        <div className="compare-product-card position-relative">
                           <img
                             src={"/images/categ.png"}
                             style={{ width: "60px" }}

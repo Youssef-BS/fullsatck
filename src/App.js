@@ -98,7 +98,7 @@ import CompareProduct from './Pages/CompareProducts';
                     path="/AllNews"
                     element={<Layout><AllNews /></Layout>}
                 />
-                 <Route path="/store" 
+                 <Route path="/store/:marketId/:categoryId" 
                 element={<Layout><Store/></Layout>}
                 />
                  <Route

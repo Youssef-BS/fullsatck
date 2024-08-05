@@ -1,7 +1,24 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { GetMarketById } from '../Features/Product/ProductSlice';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Subcomponents for better code organization
-const Categories = () => (
+const Categories = () => {
+  const dispatch = useDispatch();
+
+  const { marketId, categoryId } = useParams();
+  const MarketState = useSelector((state)=> state?.product?.Market)
+
+  useEffect(()=>{
+    dispatch(GetMarketById(marketId))
+  },[dispatch,marketId])
+  console.log(MarketState)
+  return (
     <div className="col-auto products-listing__col-left">
     <div className="products-listing__categories-wrapper">
       <div className="products-listing__categories-logo">
@@ -9,28 +26,73 @@ const Categories = () => (
       </div>
       <h2 className="products-listing__categories-title">Categories</h2>
       <ul className="products-listing__categories-links">
-        <li>
-          {/* <a className="active-link" href="#">Moving Lights</a> */}
-          <a className="active-link" href="https://www.fos-lighting.eu/moving-lights-c-172_5.html">Moving Lights</a>
-        </li>
-        <li>
-          {/* <a className="active-link" href="#">Led Strobe</a> */}
-          <a className="" href="https://www.fos-lighting.eu/led-strobe-c-172_19.html">Led Strobe</a>
-        </li>
-        <li>
-          {/* <a className="active-link" href="#">Fabrics & Gear</a> */}
-          <a className="" href="https://www.fos-lighting.eu/fabrics-gear-c-172_53.html">Fabrics & Gear</a>
-        </li>
-        <li>
-          {/* <a className="active-link" href="#">Cases & Accessories</a> */}
-          <a className="" href="https://www.fos-lighting.eu/cases-accessories-c-172_37.html">Cases & Accessories</a>
-        </li>
+        {MarketState?.Categories?.map((category) => (
+          <li key={category.id}>
+            <Link 
+              to={`/store/${marketId}/${category.id}`}
+              className={category?.id == categoryId ? "active-link" : ""}
+            >
+              {category.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   </div>
 );
+}
+  
 
-const Breadcrumb = () => (
+   
+
+
+const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
+  const { marketId, categoryId } = useParams();
+
+  const MarketState = useSelector((state)=> state?.product?.Market)
+  const CategoryState = MarketState?.Categories?.filter((category) => category.id == categoryId) || []
+
+  console.log(CategoryState[0]?.Subcategories)
+  const handleSubcategoryClick = (subcategoryId) => {
+    setActiveSubcategoryId(subcategoryId);
+  };
+
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
+  return(
     <div className="row">
     <div className="container inner">
       <div className="row">
@@ -62,7 +124,7 @@ const Breadcrumb = () => (
                         <ul className="updated">
                           <li className="search">
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
-                            <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'none' }}></i>
+                            <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'block' }}></i>
                           </li>
                           <li data-initial-id="172" data-link="https://www.fos-lighting.eu/fos-technologies-c-172.html" className="update_breadcrumb_title selected">FOS Technologies</li>
                           <li data-initial-id="173" data-link="https://www.fos-lighting.eu/intelligent-audio-c-173.html" className="update_breadcrumb_title">Intelligent Audio</li>
@@ -82,7 +144,7 @@ const Breadcrumb = () => (
                         <ul className="updated">
                           <li className="search">
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
-                            <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'none' }}></i>
+                            <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'block' }}></i>
                           </li>
                           <li data-initial-id="5" data-link="https://www.fos-lighting.eu/moving-lights-c-172_5.html" className="update_breadcrumb_title selected">Moving Lights</li>
                           <li data-initial-id="68" data-link="https://www.fos-lighting.eu/led-par-c-172_68.html" className="update_breadcrumb_title">Led Par</li>
@@ -116,8 +178,8 @@ const Breadcrumb = () => (
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
                             <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'none' }}></i>
                           </li>
-                          <li data-initial-id="6" data-link="https://www.fos-lighting.eu/hybrid-c-172_5_6.html" className="update_breadcrumb_title">Hybrid</li>
-                          <li data-initial-id="7" data-link="https://www.fos-lighting.eu/beam-c-172_5_7.html" className="update_breadcrumb_title selected">Beam</li>
+                          <li data-initial-id="6" data-link="https://www.fos-lighting.eu/hybrid-c-172_5_6.html" className="update_breadcrumb_title selected">Hybrid</li>
+                          <li data-initial-id="7" data-link="https://www.fos-lighting.eu/beam-c-172_5_7.html" className="update_breadcrumb_title ">Beam</li>
                           <li data-initial-id="8" data-link="https://www.fos-lighting.eu/wash-c-172_5_8.html" className="update_breadcrumb_title">Wash</li>
                           <li data-initial-id="9" data-link="https://www.fos-lighting.eu/spot-c-172_5_9.html" className="update_breadcrumb_title">Spot</li>
                           <li data-initial-id="86" data-link="https://www.fos-lighting.eu/waterproof-c-172_5_86.html" className="update_breadcrumb_title">Waterproof</li>
@@ -135,24 +197,25 @@ const Breadcrumb = () => (
             </div>
           </div>
         </div>
-        <div className="col mb-2">
+        <div className="col mb-2">  
           <div className="products-listing__subcategories-wrapper jsProductListingSubCatSlider slick-initialized slick-slider">
-            <div className="prev-arrow slick-arrow slick-disabled" aria-disabled="true">
-              <i className="las la-angle-left"></i>
-            </div>
-            <div className="slick-list draggable">
-              <div className="slick-track">
-                <a href="https://www.fos-lighting.eu/wash-c-172_5_8.html" className="products-listing__subcategorie slick-slide slick-active" style={{ width: '244px' }} data-slick-index="2" aria-hidden="false" tabIndex="0">
+          <Slider {...settings}>
+            {CategoryState[0]?.Subcategories
+              .map((subcategory) => (
+            
+                <a href="#"                 className={`products-listing__subcategorie slick-slide ${activeSubcategoryId === subcategory.id ? 'slick-active active' : ''}`} 
+                style={{ width: '244px' }} data-slick-index="2" aria-hidden="false" tabIndex="0"
+                onClick={() => handleSubcategoryClick(subcategory.id)}
+                >
                   <div className="products-listing__subcategorie-img">
                     <img src="uploads/thumbnails/categories_0_cat_image_8.jpg.thumb_80x59.jpg" />
                   </div>
-                  <span>Wash</span>
+                  <span>{subcategory.name}</span>
                 </a>
-              </div>
-            </div>
-            <div className="next-arrow slick-arrow" aria-disabled="false">
-              <i className="las la-angle-right"></i>
-            </div>
+                ))}
+              </Slider>
+             
+           
           </div>
           <div className="headingtitle padding_top">
             <h1 className="">
@@ -167,7 +230,12 @@ const Breadcrumb = () => (
       </div>
     </div>
   </div>
-);
+  )
+}
+
+   
+   
+
 
 const FiltersComponent = () => (
     <div className="my-3">
@@ -203,7 +271,7 @@ const FiltersComponent = () => (
           </div>
           <div className="filters-wrap small">
             <input type="hidden" name="max_allow_filters_categories_preview" value="7" />
-            <button type="button" className="btn show-all-filters" data-toggle="modal" data-target="#filtersModal" style={{ display: 'none' }}>
+            <button type="button" className="btn show-all-filters" data-toggle="modal" data-target="#filtersModal" style={{ display: 'block' }}>
               <span>All Filters</span> <i className="fa fa-sliders"></i>
             </button>
           </div>
@@ -259,46 +327,65 @@ const FiltersComponent = () => (
   </div>
 );
 
-const ProductList = () => (
+const ProductList = ({  activeSubcategoryId }) => {
+  const MarketState = useSelector((state)=> state?.product?.Market)
+
+  const { marketId, categoryId } = useParams();
+  const CategoryState = MarketState?.Categories?.filter((category) => category.id == categoryId) || []
+  const SubCategoryState = CategoryState[0]?.Subcategories?.filter((subcategory) => subcategory.id == activeSubcategoryId) || []
+console.log(SubCategoryState)
+
+
+  return(
     <div id="productboxwrapContainer" className="productboxwrapContainer products_container">
     <input type="hidden" name="allow_max_page" value="1" />
     <input type="hidden" name="totalProducts" value="9" />
     <div id="productboxwrap" className="productboxwrap container-fluid">
       <div className="row align-items-center">
-        <div className="col-lg-4 mb-4 list-box">
-          <a href="https://www.fos-lighting.eu/fos-titan-beam-p-472.html">
-            <div className="product-box" data-parent_category="172" data-product-parent-category="7" data-category="7" data-manufacturer="0" data-sortorder="1" data-price="0" data-id="472" data-filters="" data-filters-categories="" data-quantity="0" data-availiable="0" data-is_expected="" data-on_request="0" data-flag_instock="0" data-set="0" data-available_soon="" data-attributes="">
-              <div className="product-box__img">
-                <img className="lazy-scroll loaded" src="/images/product.jpg" alt="Product" />
-              </div>
-              <div className="product-box__title">
-                <span>FOS TITAN Beam</span>
-              </div>
-              <div className="product-box__code">
-                <div className="product-box__code">L005310</div>
-              </div>
-              <p className="product-box__desc">
-                Professional Beam with Super Prisms (16 facet+24 facet prism) and powerful, ultra bright OSRAM 7R Lamp (2000 hours) , 3 phase P/T motors , Solid Beam angle: 2.5° ,Anti-reflection 136mm front lenses , Control Channel:14/16 DMX ,11 colors , 16 gobos ,  Frost filter, Motorized focus from near to far (2.5M-30M) , 13.2kgs.
-              </p>
-              <div className="product-box__extra-info">
-                <div className="product-box__hot">
-                  <div className="product-box__inner">
-                    <i className="las la-fire"></i>
-                    <span>Hot product</span>
+      {SubCategoryState[0]?.Products
+            .map((product, index) => (
+              <div className="col-lg-4 mb-4 list-box">
+              <a href="https://www.fos-lighting.eu/fos-titan-beam-p-472.html">
+                <div className="product-box" data-parent_category="172" data-product-parent-category="7" data-category="7" data-manufacturer="0" data-sortorder="1" data-price="0" data-id="472" data-filters="" data-filters-categories="" data-quantity="0" data-availiable="0" data-is_expected="" data-on_request="0" data-flag_instock="0" data-set="0" data-available_soon="" data-attributes="">
+                  <div className="product-box__img">
+                    <img className="lazy-scroll loaded" src="/images/product.jpg" alt="Product" />
+                  </div>
+                  <div className="product-box__title">
+                    <span>FOS TITAN Beam</span>
+                  </div>
+                  <div className="product-box__code">
+                    <div className="product-box__code">L005310</div>
+                  </div>
+                  <p className="product-box__desc">
+                    Professional Beam with Super Prisms (16 facet+24 facet prism) and powerful, ultra bright OSRAM 7R Lamp (2000 hours) , 3 phase P/T motors , Solid Beam angle: 2.5° ,Anti-reflection 136mm front lenses , Control Channel:14/16 DMX ,11 colors , 16 gobos ,  Frost filter, Motorized focus from near to far (2.5M-30M) , 13.2kgs.
+                  </p>
+                  <div className="product-box__extra-info">
+                    <div className="product-box__hot">
+                      <div className="product-box__inner">
+                        <i className="las la-fire"></i>
+                        <span>Hot product</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
-          </a>
-        </div>
+             ))}
       </div>
     </div>
     <div id="no_products">There are currently no products.</div>
   </div>
-);
 
-const Store = () => (
-  <div id="mainbody" className="mainbody">
+  )
+}
+
+    
+
+const Store = () => {
+  const [activeSubcategoryId, setActiveSubcategoryId] = useState(null);
+
+  return  (
+    <div id="mainbody" className="mainbody">
     <div id="maincontent" className="maincontent">
       <div className="container-fluid pl-0 pr-0 products-listing__container">
         <div className="row no-gutters">
@@ -306,10 +393,12 @@ const Store = () => (
           
           <div className="col products-listing__col-right">
             <div className="container-fluid category-description-container">
-             <Breadcrumb/>
+             <Breadcrumb activeSubcategoryId={activeSubcategoryId}
+          setActiveSubcategoryId={setActiveSubcategoryId}
+         />
              </div>
              <FiltersComponent/>
-             <ProductList/>
+             <ProductList activeSubcategoryId={activeSubcategoryId}/>
 
               
               <div className="description prices-not-include-vat">
@@ -320,7 +409,12 @@ const Store = () => (
         </div>
       </div>
     </div>
-);
+
+  )
+
+ 
+}
+  
 
 
 export default Store;

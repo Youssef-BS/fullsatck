@@ -49,7 +49,7 @@ const Explore = () => {
         {category?.Subcategories?.map(SubCategory=>(
             <div className="categorybox col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
                
-            <Link to={SubCategory.SubSubcategories.length>0 ?`/explore/${marketId}/${categoryId}/${SubCategory.id}/`: `/store`} className="boxlink">
+            <Link to={SubCategory.SubSubcategories.length>0 ?`/explore/${marketId}/${categoryId}/${SubCategory.id}/`: `/store/${marketId}/${categoryId}`} className="boxlink">
 
             <div className="image">
                 <picture>

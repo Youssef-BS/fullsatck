@@ -8,7 +8,7 @@ import AccountPage from '../components/Accountinfo/Accountinfo';
 import { removeFromCart, updateCartItemQuantity,addToCart, fetchCart } from '../Features/cart/cartSlice';
 import { addProductToWishlist, getWishlistsByUser } from '../Features/wishlist/wishlistSlice';
 function ProductDetail() {
-  const userId = 1;
+  const userId = 9;
 
   const [xDisplayStyle, setXDisplayStyle] = useState('none');
   const [bDisplayStyle, setBDisplayStyle] = useState('block');
@@ -221,10 +221,7 @@ const product = [
   const updState = useSelector((state)=> state.cart.upd)
   const WishlistState = useSelector((state)=> state?.Wishlist?.wishlists)
 
-  useEffect(()=>{
-    dispatch(fetchCart(userId))
-   
-  },[updState,userId])
+ 
 
   useEffect(()=>{
     dispatch(getWishlistsByUser(userId))

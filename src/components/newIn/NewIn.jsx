@@ -16,7 +16,7 @@ const ProductBox = () => {
   const ProductState = useSelector((state) => state?.product?.Products);
   const { t } = useTranslation();
 
-  const [activeMarket, setActiveMarket] = useState(null);
+  const [activeMarket, setActiveMarket] = useState(MarketState[0]?.id);
 
   useEffect(() => {
     dispatch(GetFeaturedProduct());
@@ -25,10 +25,10 @@ const ProductBox = () => {
   }, [dispatch]);
 
   const handleMarketClick = (market) => {
-    setActiveMarket(market.id);
+    setActiveMarket(market?.id);
   };
 
-  const settings = {
+  const settings = {  
     dots: true,
     arrows: true,
     prevArrow: (
@@ -59,6 +59,8 @@ const ProductBox = () => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
+    rows:2,
+    
     autoplay: true,
     autoplaySpeed: 4000,
     responsive: [
@@ -67,20 +69,6 @@ const ProductBox = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
         },
       },
     ],
@@ -152,7 +140,7 @@ const ProductBox = () => {
                           <div className="container pl-2 pr-2">
                             <div className="slides" style={{ display: 'flex', overflowX: 'hidden', transition: 'transform 0.5s ease' }}>
                               <Slider {...settings}>
-                                {firstBlock.map((product) => (
+                                {filteredProducts.map((product) => (
                                   <Link to={`/ProductDetail/${product.id}`} tabIndex="-1" key={product.id}>
                                     <div style={{ flex: '1 0 48%', boxSizing: 'border-box', padding: '10px' }}>
                                       <div className="product-box" data-id={product.id} data-quantity="YOUR_PRODUCT_QUANTITY" data-price="YOUR_PRODUCT_PRICE">
@@ -172,30 +160,7 @@ const ProductBox = () => {
                                 ))}
                               </Slider>
                             </div>
-                            {secondBlock.length > 0 && (
-                              <Slider {...settings}>
-                                {secondBlock.map((product) => (
-                                  <div key={product.id} style={{ flex: '1 0 48%', boxSizing: 'border-box', padding: '10px' }}>
-                                    <Link to={`/ProductDetail/${product.id}`} tabIndex="-1">
-                                      <div>
-                                        <div className="product-box" data-id={product.id} data-quantity="YOUR_PRODUCT_QUANTITY" data-price="YOUR_PRODUCT_PRICE">
-                                          <div className="product-box__img">
-                                            <img src={product.image} alt={product.title} className="lazy-scroll loaded" />
-                                          </div>
-                                          <div className="product-box__title">
-                                            <Typography variant="body1">{product.title}</Typography>
-                                          </div>
-                                          <div className="product-box__code">
-                                            <div className="product-box__code">{product.id}</div>
-                                          </div>
-                                          <Typography variant="body2" className="product-box__desc">{product.description}</Typography>
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  </div>
-                                ))}
-                              </Slider>
-                            )}
+                            
                           </div>
                         </div>
                       </div>

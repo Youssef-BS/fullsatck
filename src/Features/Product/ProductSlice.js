@@ -4,6 +4,7 @@ import AuthProduct from "./productServices";
 const initialState = {
   Products: [],
   Markets: [],
+  Market:{},
   Search: [],
   Product: null,
   All: [],
