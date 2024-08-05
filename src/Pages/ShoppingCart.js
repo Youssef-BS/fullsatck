@@ -5,17 +5,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
+import { selectCurrentUser } from '../Features/auth/authSlice';
+
 
 const ShoppingCart = () => {
-  const userId = 1;
+  const CurrentUser = useSelector(selectCurrentUser);
+  const userId = parseInt(CurrentUser.user.id);
   const dispatch = useDispatch();
-  const cartState = useSelector((state) => state.cart.cart);
-  const updState = useSelector((state) => state.cart.upd);
+  const cartState = useSelector((state) => state?.cart?.cart);
+  const updState = useSelector((state) => state?.cart?.upd);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCart(userId));
-  }, [userId, updState]);
+  }, [userId, updState,dispatch]);
 
   useEffect(() => {
     if (cartState.length > 0) {
@@ -35,7 +38,7 @@ const ShoppingCart = () => {
     }
   };
 
-  const removeFromCart = (cartId, productId) => {
+  const RemoveFromCart = (cartId, productId) => {
     dispatch(removeFromCart({ cartId, productId }));
   };
 
@@ -86,7 +89,7 @@ const ShoppingCart = () => {
                                 />
                               </div>
                               <div className="delete text cart_close">
-                                <DeleteIcon onClick={() => removeFromCart(cartState[0].id, cartProduct.Product.id)} />
+                                <DeleteIcon onClick={() => RemoveFromCart(cartState[0].id, cartProduct.Product.id)} />
                               </div>
                             </div>
                             <div className="centerit productImageCart">

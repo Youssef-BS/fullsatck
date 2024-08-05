@@ -122,6 +122,7 @@ const HeaderComponent = () => {
               <Link to="/compare" className="more">Compare</Link>
 
               <span>⋅</span>
+              <LanguageSwitcher/>
               <div className="header-links__submenu dropdown">
                 <a href="#" className="dropdown-toggle" onClick={toggleDropdown}>
                   {t('about_us')}
@@ -180,14 +181,14 @@ const HeaderComponent = () => {
                       </a>
                     </div>
                     
-                    <LanguageSwitcher/>
+                    
 
                     </>
                   )}
                 </div>
               </div>
             </div>
-
+            
             <div id="login-popup-container" className={`login-popup-container ${drop ? 'active' : ''}`}>
               <div id="login-popup" className={`login-popup ${drop ? 'show' : ''}`}>
                 <i className="las la-times">

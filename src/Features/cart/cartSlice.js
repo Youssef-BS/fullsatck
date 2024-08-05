@@ -98,20 +98,20 @@ const cartSlice = createSlice({
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.cart = action.payload;
+
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = 'failed';
         state.isError = action.payload;
+        
       })
       // Add to Cart
       .addCase(addToCart.pending, (state) => {
         state.status = 'loading';
-        state.upd = false
-      })
+      })  
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.cart = action.payload
-        state.upd=true
+        state.cart = state.cart.push(action.payload)
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.status = 'failed';
@@ -120,7 +120,7 @@ const cartSlice = createSlice({
       // Update Cart Item Quantity
       .addCase(updateCartItemQuantity.pending, (state) => {
         state.status = 'loading';
-        state.upd = false
+        state.upd= false
       })
       .addCase(updateCartItemQuantity.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -134,10 +134,12 @@ const cartSlice = createSlice({
       // Remove from Cart
       .addCase(removeFromCart.pending, (state) => {
         state.status = 'loading';
+        state.upd = false
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.cart = action.payload;
+        state.upd = true
       })
       .addCase(removeFromCart.rejected, (state, action) => {
         state.status = 'failed';

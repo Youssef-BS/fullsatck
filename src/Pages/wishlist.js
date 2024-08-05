@@ -35,9 +35,11 @@ const OrderList = () => {
       dispatch(removeProductFromWishlist({ wishlistId, productId }));
     }
   };
+
  const RemoveFromWishlist =(wishlistId,productId)=>{
 dispatch(removeProductFromWishlist({wishlistId,productId}))
  }
+
   const increaseQuantity = (wishlistId, productId, quantity) => {
     dispatch(updateProductQuantity({ wishlistId, productId, quantity: quantity + 1 }));
   };
@@ -175,7 +177,6 @@ dispatch(removeProductFromWishlist({wishlistId,productId}))
                 )}
               </div>
               {WishlistState[0]?.WishlistProducts.length === 0 ? (""):(
-
               <div className="container d-lg-block d-none">
                 <div className="row">
                   <div className="col text-center mt-4 mb-5">

@@ -11,14 +11,15 @@ import ReactPlayer from 'react-player';
 import {PlayArrow } from '@mui/icons-material';
 import { getAccesoryByProduct } from '../Features/Product/ProductSlice';
 import { selectCurrentUser } from '../Features/auth/authSlice';
+import { toast } from 'react-toastify';
 
 function ProductDetail() {
  
-
-  
   const CurrentUser = useSelector(selectCurrentUser);
-  console.log(CurrentUser.user?.id)
-  const userId = CurrentUser?.user?.id ;
+  const userId = parseInt(CurrentUser?.user?.id) ;
+
+
+  console.log("thats me" + userId)
 
   console.log("worket" + CurrentUser)
   const [xDisplayStyle, setXDisplayStyle] = useState('none');
@@ -188,7 +189,7 @@ const product = [
 
   const AddToCart = (userId, productId, quantity) => {
     dispatch(addToCart({userId, productId, quantity}))
-    // Implement add to cart logic here
+    toast.success("product added to cart")
   };
 
   

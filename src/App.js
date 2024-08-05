@@ -23,9 +23,11 @@ import CompleteOrder from './Pages/CompleteOrder';
 import OrderList from './Pages/wishlist';
 import Store from './Pages/Store';
 import CompareProduct from './Pages/CompareProducts';
-import VerificationCode from './Pages/VerificationCode';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import VerificationCode from './Pages/VerificationCode';
+import PaymentSuccess from './Pages/PaymentSuccess';
+import PaymentCancel from './Pages/PaymentCancel';
 
 
 
@@ -116,6 +118,18 @@ import 'react-toastify/dist/ReactToastify.css';
                  <Route
                     path="/wishlist"
                     element={<Layout><OrderList/></Layout>}
+                />
+                  <Route
+                    path="/verify/*"
+                    element={<Layout><VerificationCode /></Layout>}
+                />
+                  <Route
+                    path="/success"
+                    element={<Layout><PaymentSuccess /></Layout>}
+                />
+                  <Route
+                    path="/cancel"
+                    element={<Layout><PaymentCancel /></Layout>}
                 />
             </Routes>
         </Router>

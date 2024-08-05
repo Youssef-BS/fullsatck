@@ -104,7 +104,7 @@ export const logout = createAsyncThunk("/logout", async (_, thunkAPI) => {
     Cookies.remove("user");
     return null;
   } catch (error) {
-    toast.error(error.message); // Display error message as toast
+    toast.error(error.message); 
     return thunkAPI.rejectWithValue(error.message);
   }
 });

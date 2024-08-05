@@ -1,23 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
 import { useTranslation } from 'react-i18next';
+import { selectCurrentUser } from '../Features/auth/authSlice';
+
 
 const Cart = ({ closeCart }) => {
-  const userId = 1;
+  const currentUser = useSelector(selectCurrentUser);
+  const userId = parseInt(currentUser?.user?.id);
   const dispatch = useDispatch();
-  const cartState = useSelector((state) => state.cart.cart);
-  const updState = useSelector((state) => state.cart.upd);
+  const cartState = useSelector((state) => state?.cart?.cart);
+  const [cart,setCart]= useState({})
+  const updState = useSelector((state) => state?.cart?.upd);
   const [total, setTotal] = React.useState(0);
   const cartRef = useRef(null);
   const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchCart(userId));
-  }, [userId, updState, dispatch]);
+    setCart(cartState[0])
+
+  }, [userId,updState]);
 
   useEffect(() => {
+
     if (cartState.length > 0) {
       let total = 0;
       cartState[0].CartProducts.forEach((cartProduct) => {
@@ -59,6 +66,7 @@ const Cart = ({ closeCart }) => {
   const handleClickInside = (event) => {
     event.stopPropagation(); // Prevent clicks inside from closing the cart
   };
+  console.log(cartState)
 
   return (
     <div
