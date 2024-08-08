@@ -50,7 +50,7 @@ import UpdateFeaturedProduct from "./pages/UpdateFeaturedProduct";
 
 function App() {
   const currentUser = useSelector((state)=>state.auth.user);
-  console.log(";;;;"+currentUser)
+    console.log(";;;;"+currentUser)
   return (
     <Router>
       <Routes>

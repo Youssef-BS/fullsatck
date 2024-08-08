@@ -3,7 +3,7 @@ import authService from "./authServices";
 import Cookies from "js-cookie";
 
 const initialState = {
-  user: authService.getCurrentUser(),
+  user:{id:1,firsName:"wassim",lasname:"admin",} ,
   isError: false,
   isLoading: false,
   isSuccess: false,
