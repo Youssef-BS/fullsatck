@@ -1,0 +1,10 @@
+header,
+accountinfo,
+footer,
+new,
+newIn,
+newsroom,
+sidemenu,
+cart,
+search,
+
