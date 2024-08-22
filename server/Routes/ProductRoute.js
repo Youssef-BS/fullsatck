@@ -19,7 +19,7 @@ const {getMarketAndCategories} = require('../Controller/ProductCtrl');
 const {createProduct} = require('../Controller/ProductCtrl');
 const {updateProduct} = require('../Controller/ProductCtrl');
 const { search } = require('../Controller/ProductCtrl');
-
+const {getMarketById} = require('../Controller/ProductCtrl');
 const router = express.Router();
 
 
@@ -30,6 +30,8 @@ router.post('/createMarke', createMarkets)
 router.get('/markets',getMarkets)
 router.get('/product/:id',getProductById)
 router.get('/news',getNewsrooms)
+router.get('/market/:id',getMarketById)
+
 router.get('/featured-product',getFeaturedProduct)
 router.delete('/delete-Market/:id',deletedMarkets) 
 router.post('/createCategory',createCategory) 

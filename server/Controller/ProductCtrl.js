@@ -398,7 +398,32 @@ const getCategoryById = asyncHandler(async (req, res) => {
 });
 
 
-
+const getMarketById = asyncHandler(async (req, res) => {
+  const id =req.params.id
+  console.log(id)
+  const markets = await Market.findByPk(id,{
+    include: [
+      {
+        model: Category,
+        include: [
+          {
+            model: Subcategory,
+            include: [
+              {
+                model: SubSubcategory,
+                include: Product // Include products in subsubcategories
+              },
+              Product // Include products in subcategories
+            ]
+          },
+          Product // Include products in categories
+        ]
+      }
+    ]
+  });
+  res.json(markets);
+  console.log(markets)
+});
   const getMarketAndCategories = asyncHandler(async (req, res) => {
     const { marketId } = req.params;
     
@@ -456,5 +481,6 @@ module.exports = {
   getSubSubcategories ,
   getSubSubcategoryById ,
   getMarketAndCategories,
-  search
+  search,
+  getMarketById
  };
