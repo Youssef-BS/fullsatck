@@ -1,0 +1,24 @@
+@startuml
+actor "Utilisateur (Client)" as Client
+actor "Administrateur" as Admin
+
+Client --> (S'authentifier)
+Client --> (Consulter les statistiques)
+Client --> (Rechercher un produit ou un commerce)
+Client --> (Consulter les détails d’un produit)
+Client --> (Suggérer des stratégies)
+
+Admin --> (Gérer les utilisateurs)
+Admin --> (Générer un rapport)
+
+(S'authentifier) .> (Consulter les statistiques) : <<include>>
+(S'authentifier) .> (Rechercher un produit ou un commerce) : <<include>>
+(S'authentifier) .> (Consulter les détails d’un produit) : <<include>>
+(S'authentifier) .> (Générer un rapport) : <<include>>
+(S'authentifier) .> (Suggérer des stratégies) : <<include>>
+
+(Rechercher un produit ou un commerce) .> (Consulter les détails d’un produit) : <<extend>>
+
+@enduml
+
+

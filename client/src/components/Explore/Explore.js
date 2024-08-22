@@ -20,13 +20,29 @@ const Explore = () => {
         // Show categories for the selected market
       content = (
         <>
+        <div id="maincontent" className="maincontent">
+                <div className="container-fluid category-description-container">
+                    <div className="row">
+                        <div className="col title">
+                            <div className="headingtitle">
+                                <a href={`https://www.fos-lighting.eu/intelligent-audio-c-${marketId}.html`} className="category-box__image-wrapper">
+                                    <img className="header-logo" style={{width:100}}src={MarketState?.image} alt="Active Speakers" />
+                                </a>
+                                <h1>{MarketState?.name}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="product-categories-wrap">
+                    <div className="container-fluid product-categories">
+                        <div className="row my-0">
         {MarketState?.Categories?.map(Category=>(
             <div className="categorybox col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
             <Link to={Category.Subcategories.length>0 ?`/explore/${marketId}/${Category.id}/`: `/store`} className="boxlink">
             <div className="image">
                 <picture>
-                    <source media="(min-width: 1361px)" srcSet="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" />
-                    <img src="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" className="lazyload" alt="ABS Active Speakers" />
+                    <source media="(min-width: 1361px)" srcSet={Category?.Products[0]?.image}/>
+                    <img src={Category?.Products[0]?.image} className="lazyload" alt="ABS Active Speakers" />
                 </picture>
             </div>
             <div className="title">
@@ -35,6 +51,10 @@ const Explore = () => {
         </Link>
     </div>
         ))      }
+         </div>
+    </div>
+    </div>
+    </div>
         
     </>
         
@@ -46,24 +66,43 @@ const Explore = () => {
       // Show subcategories for the selected category
       content = (
         <>
+        <div id="maincontent" className="maincontent">
+                <div className="container-fluid category-description-container">
+                    <div className="row">
+                        <div className="col title">
+                            <div className="headingtitle">
+                                <a href={`https://www.fos-lighting.eu/intelligent-audio-c-${marketId}.html`} className="category-box__image-wrapper">
+                                    <img className="header-logo" style={{width:100}}src={MarketState?.image} alt="Active Speakers" />
+                                </a>
+                                <h1>{category?.name}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="product-categories-wrap">
+                    <div className="container-fluid product-categories">
+                        <div className="row my-0">
         {category?.Subcategories?.map(SubCategory=>(
             <div className="categorybox col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
                
-            <Link to={SubCategory.SubSubcategories.length>0 ?`/explore/${marketId}/${categoryId}/${SubCategory.id}/`: `/store/${marketId}/${categoryId}`} className="boxlink">
+               <Link to={SubCategory.SubSubcategories.length>0 ?`/explore/${marketId}/${categoryId}/${SubCategory.id}/`: `/store/${marketId}/${categoryId}`} className="boxlink">
 
             <div className="image">
                 <picture>
-                    <source media="(min-width: 1361px)" srcSet="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" />
-                    <img src="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png" className="lazyload" alt="ABS Active Speakers" />
+                    <source media="(min-width: 1361px)" srcSet={SubCategory?.Products[0]?.image} />
+                    <img src={SubCategory?.Products[0]?.image} className="lazyload" alt="ABS Active Speakers" />
                 </picture>
             </div>
             <div className="title">
-                <span>ABS Active Speakers</span>
+                <span>{SubCategory?.name}</span>
             </div>
         </Link>
     </div>
         ))      }
-        
+        </div>
+        </div>
+        </div>
+        </div>
     </>
       );
     } else if (marketId && categoryId && subcategoryId) {
@@ -96,31 +135,13 @@ const Explore = () => {
                     </div>
                 </div>
             </div>
-            <div id="maincontent" className="maincontent">
-                <div className="container-fluid category-description-container">
-                    <div className="row">
-                        <div className="col title">
-                            <div className="headingtitle">
-                                <a href={`https://www.fos-lighting.eu/intelligent-audio-c-${marketId}.html`} className="category-box__image-wrapper">
-                                    <img className="header-logo" src="/images/categ.png" alt="Active Speakers" />
-                                </a>
-                                <h1>Active Speakers</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="product-categories-wrap">
-                    <div className="container-fluid product-categories">
-                        <div className="row my-0">
+            
                         {content}
 
                             
                            
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    
     );
 };
 

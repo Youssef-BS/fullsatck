@@ -89,18 +89,13 @@ const HeaderComponent = () => {
     e.preventDefault();
 
     try {
-      await dispatch(login({ email, password }));
-      navigate('/');
+        await dispatch(login({ email, password })).unwrap();
+        navigate('/');
     } catch (error) {
-      console.error('Login failed:', error.message);
-      if (error.response) {
-        const { data } = error.response;
-        setError(data.message);
-      } else {
-        setError('Login failed. Please check your credentials.');
-      }
+        console.error('Login failed:', error);
+        setError(error.message);  
     }
-  };
+};
 
   return (
     <>
@@ -127,6 +122,7 @@ const HeaderComponent = () => {
               <Link to="/compare" className="more">Compare</Link>
 
               <span>⋅</span>
+              <LanguageSwitcher/>
               <div className="header-links__submenu dropdown">
                 <a href="#" className="dropdown-toggle" onClick={toggleDropdown}>
                   {t('about_us')}
@@ -185,14 +181,14 @@ const HeaderComponent = () => {
                       </a>
                     </div>
                     
-                    <LanguageSwitcher/>
+                    
 
                     </>
                   )}
                 </div>
               </div>
             </div>
-
+            
             <div id="login-popup-container" className={`login-popup-container ${drop ? 'active' : ''}`}>
               <div id="login-popup" className={`login-popup ${drop ? 'show' : ''}`}>
                 <i className="las la-times">
@@ -215,52 +211,53 @@ const HeaderComponent = () => {
                   </form>
                 </div>
                 <div className="column logincolumn">
-                  <form name="login" id="login" method="post" onSubmit={handleLogin}>
-                    <div>
-                      <span id="title" style={{ color: 'black' }}>{t('registered_user')}</span>
-                      <input type="hidden" id="come_from" name="come_from" value="https://www.fos-lighting.eu/" />
-                    </div>
-                    <div className="intro" style={{ color: 'black' }}>
-                      {t('are_you_registered')}
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifyItems: 'center' }}>
-                      <EmailIcon style={{ color: "black", marginRight: '8px' }} />
-                      <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        className="field"
-                        placeholder={t('email_address')}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifyItems: 'center' }}>
-                      <LockIcon style={{ color: "black", marginRight: '8px' }} />
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        className="field"
-                        placeholder={t('password')}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="forgot-pass">
-                      <a href="#" className="forgotpassword" id="forgotpassword">
-                        {t('forgot_your_password')}
-                      </a>
-                    </div>
-                    <div className="btncontainer">
-                      <button type="submit" className="shop-btn">
-                        {t('login')}
-                      </button>
-                    </div>
-                    {error && <div className="error-message">{error}</div>}
-                    <div className="clear"></div>
-                  </form>
-                </div>
+                <form name="login" id="login" method="post" onSubmit={handleLogin}>
+                  <div>
+                    <span id="title" style={{ color: 'black' }}>Registered User</span>
+                    <input type="hidden" id="come_from" name="come_from" value="https://www.fos-lighting.eu/" />
+                  </div>
+                  <div className="intro" style={{ color: 'black' }}>
+                    Are you registered? Login:
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifyItems: 'center' }}>
+                    <EmailIcon style={{ color: "black", marginRight: '8px' }} />
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      className="field"
+                      placeholder="Email Address:"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifyItems: 'center' }}>
+                    <LockIcon style={{ color: "black", marginRight: '8px' }} />
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="field"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="forgot-pass">
+                    <a href="#" className="forgotpassword" id="forgotpassword">
+                      Forgot your password?
+                    </a>
+                  </div>
+                  <div className="btncontainer">
+                    <button type="submit" className="shop-btn">
+                      Login
+                    </button>
+                  </div>
+                  {error && <p className="error" style={{color : "red"}}>{error.message}</p>}
+
+                  <div className="clear"></div>
+                </form>
+              </div>
                 <div className="clear"></div>
               </div>
             </div>

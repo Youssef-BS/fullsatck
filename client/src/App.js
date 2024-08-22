@@ -23,6 +23,12 @@ import CompleteOrder from './Pages/CompleteOrder';
 import OrderList from './Pages/wishlist';
 import Store from './Pages/Store';
 import CompareProduct from './Pages/CompareProducts';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import VerificationCode from './Pages/VerificationCode';
+import PaymentSuccess from './Pages/PaymentSuccess';
+import PaymentCancel from './Pages/PaymentCancel';
+
 
 
 
@@ -39,6 +45,7 @@ import CompareProduct from './Pages/CompareProducts';
     };
     const App = () => {
     return (
+        <>
         <Router>
             <Routes>
                 <Route
@@ -78,6 +85,9 @@ import CompareProduct from './Pages/CompareProducts';
                     path="/explore/:marketId/:categoryId/:subCategoryId"
                     element={<Layout><Explore /></Layout>}
                 />
+                <Route path="/store/:marketId/:categoryId" 
+                element={<Layout><Store/></Layout>}
+                />
                 <Route 
                 path='/compare'
                 element={<Layout><CompareProduct /></Layout>}
@@ -98,7 +108,7 @@ import CompareProduct from './Pages/CompareProducts';
                     path="/AllNews"
                     element={<Layout><AllNews /></Layout>}
                 />
-                 <Route path="/store/:marketId/:categoryId" 
+                 <Route path="/store" 
                 element={<Layout><Store/></Layout>}
                 />
                  <Route
@@ -113,8 +123,22 @@ import CompareProduct from './Pages/CompareProducts';
                     path="/wishlist"
                     element={<Layout><OrderList/></Layout>}
                 />
+                  <Route
+                    path="/verify/*"
+                    element={<Layout><VerificationCode /></Layout>}
+                />
+                  <Route
+                    path="/success"
+                    element={<Layout><PaymentSuccess /></Layout>}
+                />
+                  <Route
+                    path="/cancel"
+                    element={<Layout><PaymentCancel /></Layout>}
+                />
             </Routes>
         </Router>
+        <ToastContainer />
+        </>
     );
 };
 

@@ -22,7 +22,7 @@ const CategoryBox = () => {
   }, [dispatch]);
 
   const handleAddToCompare = (product) => {
-
+    
   if (compareProducts.some((item) => item.id === product.id)) {
     toast.error('Product is already in the comparison list');
     return;

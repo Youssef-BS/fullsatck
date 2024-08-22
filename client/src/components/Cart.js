@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
 import { useTranslation } from 'react-i18next';
+import { selectCurrentUser } from '../Features/auth/authSlice';
 
 const Cart = ({ closeCart }) => {
-  const userId = 9;
-  const dispatch = useDispatch();
+
+  const currentUser = useSelector(selectCurrentUser);
+  const userId = parseInt(currentUser?.user?.id);
+    const dispatch = useDispatch();
   const cartState = useSelector((state) => state?.cart?.cart);
   const [cart,setCart]= useState({})
   const updState = useSelector((state) => state?.cart?.upd);
