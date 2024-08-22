@@ -1,24 +1,23 @@
 .language-switcher {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-  }
-  
-  .language-icon {
-    cursor: pointer;
-    margin-right: 8px;
-  }
-  
-  .language-select {
-    margin-left: 8px;
-  }
-  
-  .flag-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-  }
-  
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.language-icon {
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.language-select {
+  margin-left: 8px;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}

@@ -22,11 +22,6 @@ const CategoryBox = () => {
   }, [dispatch]);
 
   const handleAddToCompare = (product) => {
-
-  if (compareProducts.some((item) => item.id === product.id)) {
-    toast.error('Product is already in the comparison list');
-    return;
-  }
     if (compareProducts.length<3){
     dispatch(addProductToCompare(product));
     toast.success('Product added to comparison list');}
@@ -47,9 +42,8 @@ const CategoryBox = () => {
 
   const settings = {
     arrows: true,
-    dots: true,
     infinite: true,
-    speed: 600,
+    speed: 5000,
     slidesToShow: 2,
     slidesToScroll: 2,
     responsive: [
@@ -95,7 +89,7 @@ const CategoryBox = () => {
                   <Link to={`/explore/${market.id}`} className="category-box__image-wrapper">
                     <img
                       className="category-box__image"
-                      src="https://www.fos-lighting.eu/uploads/categories_0_cat_image_172.png"
+                      src={market?.image}
                       alt="Intelligent Lighting Technology"
                     />
                   </Link>

@@ -31,7 +31,7 @@ function Projects() {
                             <a href={`project-select/${project.id}`} className="project__img">
                                 <img src={project.image} className="img-fluid" border="0" alt="Project" />
                                 <div className="project__description">
-                                    <p className="mb-0">{project.description}</p>
+                                    <p className="mb-0">{project.title}</p>
                                 </div>
                             </a>
                         </div>

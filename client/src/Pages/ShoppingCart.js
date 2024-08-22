@@ -5,9 +5,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
+import { selectCurrentUser } from '../Features/auth/authSlice';
+
 
 const ShoppingCart = () => {
-  const userId = 9;
+  const CurrentUser = useSelector(selectCurrentUser);
+  const userId = parseInt(CurrentUser.user.id);
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state?.cart?.cart);
   const updState = useSelector((state) => state?.cart?.upd);

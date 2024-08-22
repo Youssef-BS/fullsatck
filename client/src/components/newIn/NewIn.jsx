@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetFeaturedProduct } from '../../Features/Newsroom/newsSlices';
-import { GetAllProducts, GetMarkets } from '../../Features/Product/ProductSlice';
+import { GetAllProducts, GetMarkets , GetAll  } from '../../Features/Product/ProductSlice';
 import { Typography } from '@mui/material'; // Importing Material-UI components
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -14,6 +14,7 @@ const ProductBox = () => {
   const FeaturedP = useSelector((state) => state?.news?.FeaturedP);
   const MarketState = useSelector((state) => state?.product?.Markets);
   const ProductState = useSelector((state) => state?.product?.Products);
+  
   const { t } = useTranslation();
 
   const [activeMarket, setActiveMarket] = useState(MarketState[0]?.id);
@@ -22,6 +23,7 @@ const ProductBox = () => {
     dispatch(GetFeaturedProduct());
     dispatch(GetMarkets());
     dispatch(GetAllProducts());
+    dispatch(GetAll());  
   }, [dispatch]);
 
   const handleMarketClick = (market) => {
@@ -37,8 +39,8 @@ const ProductBox = () => {
           fontSize: 32,
           color: 'black',
           '&:hover': {
-            color: 'black', // Change color on hover
-            cursor: 'pointer', // Change cursor to pointer on hover
+            color: 'black', 
+            cursor: 'pointer', 
           },
         }}
       />
@@ -110,8 +112,8 @@ const ProductBox = () => {
   };
 
   const filteredProducts = ProductState?.filter(product => product.MarketId === activeMarket).slice(0, 4) || [];
-  const firstBlock = filteredProducts.slice(0, 2);
-  const secondBlock = filteredProducts.slice(2, 4);
+
+  console.log("ok",ProductState)
 
   return (
     <section className="new-in-featured mb-4">

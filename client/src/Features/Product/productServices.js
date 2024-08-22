@@ -45,6 +45,13 @@ const GetMarketById = async (id) => {
   return response.data;
 };
 
+const getAccesoryByProduct = async(productId) => {
+  const response = await axios.get(
+      `http://localhost:3000/productRelation/${productId}`,
+  );
+  return response.data;
+}
+
 
 const AuthProduct = {
     GetProductById,
@@ -52,7 +59,9 @@ const AuthProduct = {
     GetAll,
     GetMarkets,
     Search,
-    GetMarketById
+    GetMarketById ,
+    getAccesoryByProduct
+    
 };
 
 export default AuthProduct;

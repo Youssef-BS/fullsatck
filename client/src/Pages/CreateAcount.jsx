@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { login, register } from '../Features/auth/authSlice';
 import {  Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
@@ -29,7 +27,6 @@ const countries = [
 ];
 
 const CreateAccountForm = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         email: '',
@@ -49,10 +46,10 @@ const CreateAccountForm = () => {
         accept_gdpr: false,
     });
 
-    const [verificationCode, setVerificationCode] = useState('');
+
     const [errors, setErrors] = useState({});
     const [isVerificationSent, setIsVerificationSent] = useState(false);
-    const [verificationError, setVerificationError] = useState('');
+   
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -89,7 +86,7 @@ const CreateAccountForm = () => {
         }
         try {
             await dispatch(register(formData));
-            toast.success('Account created successfully! Please verify your email.');
+            toast.success('Account created successfully! Please verify your email to continue.');
             setIsVerificationSent(true);
         } catch (error) {
             toast.error('Error registering user');
@@ -97,27 +94,10 @@ const CreateAccountForm = () => {
         }
     };
 
-    const handleVerificationSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:3000/auth/verifEmail', {
-                email: formData.email,
-                verificationCode,
-            });
-            toast.success('Email verified successfully! Redirecting...');
-            navigate("/");
-        } catch (error) {
-            toast.error('Invalid verification code');
-            setVerificationError('Invalid verification code');
-            console.error('Error verifying email:', error);
-        }
-    };
-    
-
+  
     return (
         <div className="mainbody">
             <ToastContainer />
-            {!isVerificationSent ? (
                 <div className="container-fluid">
                     <div className="section-bg-w-br-30 create-account px-3 px-lg-5 pb-0 pb-lg-5">
                         <form name="create_account" id="create_account" action="https://www.fos-lighting.eu/create_account.php" method="post" noValidate>
@@ -358,40 +338,6 @@ const CreateAccountForm = () => {
                         </form>
                     </div>
                 </div>
-            ) : (
-                <div className="container-fluid">
-                    <div className="section-bg-w-br-30 create-account px-3 px-lg-5 pb-0 pb-lg-5">
-                        <form name="verification_form" id="verification_form" noValidate>
-                            <div className="row text-center">
-                                <div className="col-12 col-lg-11 offset-lg-1">
-                                    <div>
-                                        <h1 className="headingtitle text-left pt-4 pb-3 pt-lg-5 pb-lg-5">Email Verification</h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row pb-5 mb-5">
-                                <div className="col-lg-10 offset-lg-1">
-                                    <div className="field">
-                                        <div className="fieldlabel">Verification Code:</div>
-                                        <div className="fieldkey">
-                                            <input
-                                                type="text"
-                                                name="verificationCode"
-                                                id="verificationCode"
-                                                value={verificationCode}
-                                                onChange={(e) => setVerificationCode(e.target.value)}
-                                            />
-                                            <span className="inputRequirement">*</span>
-                                        </div>
-                                        <div className="clear"></div>
-                                    </div>
-                                    <Button type="submit" className="btn-submit btn-rounder btn-filled" onClick={handleVerificationSubmit}>Verify Email</Button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

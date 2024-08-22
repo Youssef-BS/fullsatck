@@ -51,6 +51,11 @@ const Product = sequelize.define('Product', {
     type: DataTypes.JSON, 
     allowNull: true 
   },
+  quantity : {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 1
+  }
  
 
 });

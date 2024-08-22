@@ -23,6 +23,9 @@ import CompleteOrder from './Pages/CompleteOrder';
 import OrderList from './Pages/wishlist';
 import Store from './Pages/Store';
 import CompareProduct from './Pages/CompareProducts';
+import PaymentSuccess from './Pages/PaymentSuccess';
+import PaymentCancel from './Pages/PaymentCancel';
+import VerificationCode from './Pages/VerificationCode';
 
 
 
@@ -112,6 +115,18 @@ import CompareProduct from './Pages/CompareProducts';
                  <Route
                     path="/wishlist"
                     element={<Layout><OrderList/></Layout>}
+                />
+                 <Route
+                    path="/success"
+                    element={<Layout><PaymentSuccess /></Layout>}
+                />
+                  <Route
+                    path="/cancel"
+                    element={<Layout><PaymentCancel /></Layout>}
+                />
+                  <Route
+                    path="/verify/*"
+                    element={<Layout><VerificationCode /></Layout>}
                 />
             </Routes>
         </Router>

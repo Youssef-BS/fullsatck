@@ -8,6 +8,7 @@ import cartSliceReducer from '../Features/cart/cartSlice'
 import wshlistSliceReducer from '../Features/wishlist/wishlistSlice'
 import projectProductReducer from "../Features/projectProduct/projectProductSlice";
 import compareReducer from "../Features/compare/compareSlice"
+import orderReducer from "../Features/order/orderSlice";
 export const store = configureStore({
   reducer: {
     product: productReducer,
@@ -18,7 +19,8 @@ export const store = configureStore({
     wishlist : wshlistSliceReducer,
     cart : cartSliceReducer,
     projectProduct : projectProductReducer,
-    compare  : compareReducer
+    compare  : compareReducer ,
+    orders : orderReducer 
 
   },
 });

@@ -203,13 +203,16 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
             {CategoryState[0]?.Subcategories
               .map((subcategory) => (
             
-                <a href="#"                 className={`products-listing__subcategorie slick-slide ${activeSubcategoryId === subcategory.id ? 'slick-active active' : ''}`} 
+                <a href="#" className={`products-listing__subcategorie slick-slide ${activeSubcategoryId === subcategory.id ? 'slick-active active' : ''}`} 
                 style={{ width: '244px' }} data-slick-index="2" aria-hidden="false" tabIndex="0"
                 onClick={() => handleSubcategoryClick(subcategory.id)}
                 >
-                  <div className="products-listing__subcategorie-img">
-                    <img src="uploads/thumbnails/categories_0_cat_image_8.jpg.thumb_80x59.jpg" />
-                  </div>
+                   <div className="image">
+                <picture>
+                    <source media="(min-width: 1361px)" srcSet={subcategory?.Products[0]?.image}/>
+                    <img src={subcategory?.Products[0]?.image} className="lazyload" alt="ABS Active Speakers" width={50} />
+                </picture>
+            </div>
                   <span>{subcategory.name}</span>
                 </a>
                 ))}
@@ -237,95 +240,120 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
    
 
 
-const FiltersComponent = () => (
+const FiltersComponent = () => {
+  const [priceFrom, setPriceFrom] = useState(578.4);
+  const [priceTo, setPriceTo] = useState(1998.4);
+  const [availability, setAvailability] = useState([]);
+
+  const handlePriceChange = (event, type) => {
+    const value = parseFloat(event.target.value);
+    if (type === 'from') {
+      setPriceFrom(value);
+    } else if (type === 'to') {
+      setPriceTo(value);
+    }
+  };
+
+  const handleAvailabilityChange = (event) => {
+    const value = event.target.value;
+    setAvailability((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
+    );
+  };
+
+  return (
     <div className="my-3">
-    <div className="outer-filters-wrap">
-      <div className="prefilters container-fluid">
-        <div className="row filterbox bar">
-          <input type="hidden" name="product_listing_type" value="c_172_5_7" />
-          <input type="hidden" name="chooseProductListingPage" value="1" id="chooseProductListingPage" className="chooseProductListingPage" />
-          <input type="hidden" name="chooseProductListingItemsPerPage" value="72" id="chooseProductListingItemsPerPage" className="chooseProductListingItemsPerPage" />
-          <input type="hidden" name="sort" value="new" id="sort" className="sort_listing" />
-          <div className="modal fade" id="filtersModal" tabIndex="-1" role="dialog" aria-labelledby="filtersModal" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered filters" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLongTitle"><i className="las la-sliders-h"></i> Filters</h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <i className="las la-times"></i>
-                  </button>
-                </div>
-                <div className="modal-body"></div>
-                <div className="modal-footer py-4">
-                  <div className="m-auto">
-                    <button type="button" className="shop-btn outline mx-2 clear_all_filters" value="">
-                      Clear <i className="las la-trash-alt"></i>
-                    </button>
-                    <button type="button" className="shop-btn mx-2" data-dismiss="modal" value="">
-                      Save and close
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="filters-wrap small">
-            <input type="hidden" name="max_allow_filters_categories_preview" value="7" />
-            <button type="button" className="btn show-all-filters" data-toggle="modal" data-target="#filtersModal" style={{ display: 'block' }}>
-              <span>All Filters</span> <i className="fa fa-sliders"></i>
-            </button>
-          </div>
-          <div className="filters-actions-wrap">
-            <div className="extended_filters_category filter basic items-per-page listing-actions">
+      <div className="outer-filters-wrap">
+        <div className="prefilters container-fluid">
+          <div className="row filterbox bar">
+            {/* Hidden input fields for product listing type */}
+            <input type="hidden" name="product_listing_type" value="c_172_5_6" />
+            <input type="hidden" name="chooseProductListingPage" value="1" id="chooseProductListingPage" className="chooseProductListingPage" />
+            <input type="hidden" name="chooseProductListingItemsPerPage" value="72" id="chooseProductListingItemsPerPage" className="chooseProductListingItemsPerPage" />
+            <input type="hidden" name="sort" value="asc" id="sort" className="sort_listing" />
+
+            {/* Price Range Filter */}
+            <div className="extended_filters_category filter basic price_range">
               <div className="flabel price_range_label toggle_filter_category">
-                <span className="items-pp-label">Show 72 products</span><i className="las la-angle-down" aria-hidden="true"></i>
+                <span>Price Range</span>
+                <i className="las la-angle-down" aria-hidden="true"></i>
               </div>
               <div className="extended_filter_field_container">
-                <div className="ffield">
-                  <div className="actions">
-                    <div className="filters-drop-container">
-                      <ul className="chooseProductListingItemsPerPageList filter-drop-menu">
-                        <li data-id="36" className="chooseProductListingItemsPerPageListElement">Show 36 products</li>
-                        <li data-id="72" className="chooseProductListingItemsPerPageListElement selected">Show 72 products</li>
-                        <li data-id="view-all" className="chooseProductListingItemsPerPageListElement">View all</li>
-                      </ul>
-                    </div>
+                <div className="ffield price_range_box">
+                  <input type="hidden" name="price_from" value={priceFrom} />
+                  <input type="hidden" name="price_to" value={priceTo} />
+                  <input type="hidden" name="price_max" value={1998.4} />
+                  <input type="hidden" name="price_min" value={578.4} />
+                  <div className="ffield price_range_field">
+                    <span className="irs irs--round js-irs-0 irs-with-grid">
+                      <input
+                        type="range"
+                        min="578.4"
+                        max="1998.4"
+                        step="0.01"
+                        value={priceFrom}
+                        onChange={(e) => handlePriceChange(e, 'from')}
+                      />
+                      <input
+                        type="range"
+                        min="578.4"
+                        max="1998.4"
+                        step="0.01"
+                        value={priceTo}
+                        onChange={(e) => handlePriceChange(e, 'to')}
+                      />
+                      <span className="irs-bar" style={{ left: `${(priceFrom / 1998.4) * 100}%`, width: `${((priceTo - priceFrom) / 1998.4) * 100}%` }}></span>
+                    </span>
+                    <input className="range irs-hidden-input" type="text" name="" value="" style={{ display: 'none' }} tabIndex="-1" readOnly />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="extended_filters_category filter basic sorting product-listing-action">
+
+            {/* Availability Filter */}
+            <div className="extended_filters_category extended_filters_category_traverse extended_filters_category_availability">
               <div className="flabel toggle_filter_category">
-                <span className="cat-name">Sort by Date</span> <i className="las la-sort-amount-down"></i>
+                <span className="cat-name">Availability</span>
+                <span className="active_filters_local_count"></span>
+                <i className="las la-angle-down" aria-hidden="true"></i>
               </div>
               <div className="extended_filter_field_container">
                 <div className="ffield">
-                  <div data-id="new" className="sortListElement sortListElement_new selected">Sort by Date</div>
+                  <input
+                    type="checkbox"
+                    name="filter_availability[]"
+                    value="3"
+                    checked={availability.includes('3')}
+                    onChange={handleAvailabilityChange}
+                    id="filter_availability_3_"
+                    autoComplete="off"
+                    data-tag="out-of-stock"
+                  />
+                  <label htmlFor="filter_availability_3_" data-name="Out of stock">Out of stock</label>
                 </div>
+                <div className="ffield">
+                  <input
+                    type="checkbox"
+                    name="filter_availability[]"
+                    value="1"
+                    checked={availability.includes('1')}
+                    onChange={handleAvailabilityChange}
+                    id="filter_availability_1_"
+                    autoComplete="off"
+                    data-tag="in-stock"
+                  />
+                  <label htmlFor="filter_availability_1_" data-name="In stock">In stock</label>
+                </div>
+                <div className="clear"></div>
               </div>
-            </div>
-            <div className="paginationFilterContainer"></div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <div className="live-filters-wrapper" id="live-filters-wrapper">
-              <div className="live-filters-container">
-                <div className="active-filters filter basic live-filters">
-                  <i className="flabel">Selected Filters</i>
-                  <div className="filters-actions"></div>
-                </div>
-                <div className="clear_all_filters">
-                  <div className="text">Clear <i className="las la-trash-alt"></i></div>
-                </div>
-              </div>
+              <div className="clear"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ProductList = ({  activeSubcategoryId }) => {
   const MarketState = useSelector((state)=> state?.product?.Market)
@@ -344,31 +372,34 @@ console.log(SubCategoryState)
       <div className="row align-items-center">
       {SubCategoryState[0]?.Products
             .map((product, index) => (
-              <div className="col-lg-4 mb-4 list-box">
-              <a href="https://www.fos-lighting.eu/fos-titan-beam-p-472.html">
-                <div className="product-box" data-parent_category="172" data-product-parent-category="7" data-category="7" data-manufacturer="0" data-sortorder="1" data-price="0" data-id="472" data-filters="" data-filters-categories="" data-quantity="0" data-availiable="0" data-is_expected="" data-on_request="0" data-flag_instock="0" data-set="0" data-available_soon="" data-attributes="">
-                  <div className="product-box__img">
-                    <img className="lazy-scroll loaded" src="/images/product.jpg" alt="Product" />
-                  </div>
-                  <div className="product-box__title">
-                    <span>FOS TITAN Beam</span>
-                  </div>
-                  <div className="product-box__code">
-                    <div className="product-box__code">L005310</div>
-                  </div>
-                  <p className="product-box__desc">
-                    Professional Beam with Super Prisms (16 facet+24 facet prism) and powerful, ultra bright OSRAM 7R Lamp (2000 hours) , 3 phase P/T motors , Solid Beam angle: 2.5° ,Anti-reflection 136mm front lenses , Control Channel:14/16 DMX ,11 colors , 16 gobos ,  Frost filter, Motorized focus from near to far (2.5M-30M) , 13.2kgs.
-                  </p>
-                  <div className="product-box__extra-info">
-                    <div className="product-box__hot">
-                      <div className="product-box__inner">
-                        <i className="las la-fire"></i>
-                        <span>Hot product</span>
+              <div key={product.id} className="col-md-6 col-lg-4 mb-4 px-3 ">
+              <div className="card product-card shadow-sm h-100 ">
+                <a href={`https://www.fos-lighting.eu/${product.slug}-p-${product.id}.html`} className="text-decoration-none">
+                  <img
+                    src={product.image || '/images/default-product.jpg'}
+                    className="card-img-top"
+                    alt={product.name}
+                    loading="lazy"
+                    style={{ maxHeight: '200px', objectFit: 'cover' }}
+                  />
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title text-dark">{product.title}</h5>
+                    <p className="card-text text-muted small">{product.code}</p>
+                    {product.quantity > 0 ? (
+                      <p className="card-text text-success small">In Stock</p>
+                    ) : (
+                      <p className="card-text text-danger small">Out of Stock</p>
+                    )}
+                    <p className="card-text text-truncate">{product.description.slice(0, 120)}...</p>
+                    <p className="text-success fw-bold mt-auto">{product.price}€</p>
+                    {product.isHot && (
+                      <div className="badge bg-danger text-white mt-2">
+                        <i className="las la-fire"></i> Hot Product
                       </div>
-                    </div>
+                    )}
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
              ))}
       </div>
@@ -389,8 +420,7 @@ const Store = () => {
     <div id="maincontent" className="maincontent">
       <div className="container-fluid pl-0 pr-0 products-listing__container">
         <div className="row no-gutters">
-            <Categories/>
-          
+            <Categories/> 
           <div className="col products-listing__col-right">
             <div className="container-fluid category-description-container">
              <Breadcrumb activeSubcategoryId={activeSubcategoryId}
@@ -399,8 +429,6 @@ const Store = () => {
              </div>
              <FiltersComponent/>
              <ProductList activeSubcategoryId={activeSubcategoryId}/>
-
-              
               <div className="description prices-not-include-vat">
                 Prices do not include VAT
               </div>

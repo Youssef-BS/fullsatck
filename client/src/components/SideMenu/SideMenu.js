@@ -327,12 +327,12 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                                                                       >
                                                                                                           <div className="menu-product-link__img mr-3">
                                                                                                               <img
-                                                                                                                  src="/images/product.jpg"
-                                                                                                                  alt="IHOS Wheels Kit"
+                                                                                                                  src={product.image}
+                                                                                                                  alt={product.image}
                                                                                                               />
                                                                                                           </div>
                                                                                                           <div className="menu-product-link__title">
-                                                                                                              <span>IHOS Wheels Kit</span>
+                                                                                                              <span>{product.title}</span>
                                                                                                           </div>
                                                                                                       </Link>
                                                                                                   </li>
@@ -353,8 +353,8 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                                               >
                                                                                   <div className="menu-product-link__img mr-3">
                                                                                       <img
-                                                                                          src="/images/product.jpg"
-                                                                                          alt="IHOS Wheels Kit"
+                                                                                          src={product.image}
+                                                                                          alt={product.image}
                                                                                       />
                                                                                   </div>
                                                                                   <div className="menu-product-link__title">

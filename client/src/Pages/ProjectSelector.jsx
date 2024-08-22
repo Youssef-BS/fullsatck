@@ -110,12 +110,6 @@ getData() ;
     // Render component content once selectedProject is available
     return (
         <div id="maincontent" className="maincontent">
-            {/* Main Content */}
-            <div className="headingtitle">
-                <div className="mainwrap project_title_container">
-                    <div className="project_title">{selectedProject.title}</div>
-                </div>
-            </div>
             <div className="breadcrumb">
                 <b>You are here: </b>
                 <a href="https://www.fos-lighting.eu" className="headerNavigation">Home</a> »
@@ -144,7 +138,7 @@ getData() ;
             <div className="container-fluid mb-5">
                 <div className="section-bg-w-br-30 px-5 pb-5">
                     <div className="project-description">
-                        {/* Render project description or additional details */}
+                        
                     </div>
                 </div>
 
