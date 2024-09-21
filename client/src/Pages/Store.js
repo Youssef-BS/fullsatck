@@ -10,7 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 // Subcomponents for better code organization
 const Categories = () => {
   const dispatch = useDispatch();
-
   const { marketId, categoryId } = useParams();
   const MarketState = useSelector((state)=> state?.product?.Market)
 
@@ -100,24 +99,24 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
           <div className="breadcrumb_container">
             <div className="breadcrumb" id="breadcrumb_static">
               <div className="mainwrap">
-                <a href="https://www.fos-lighting.eu" className="headerNavigation">Home</a><i>/</i>
-                <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html" className="headerNavigation">FOS Technologies</a><i>/</i>
-                <a href="https://www.fos-lighting.eu/moving-lights-c-172_5.html" className="headerNavigation">Moving Lights</a><i>/</i>
-                <a href="https://www.fos-lighting.eu/beam-c-172_5_7.html" className="headerNavigation">Beam</a>
+                <a href="#" className="headerNavigation">Home</a><i>/</i>
+                <a href="#" className="headerNavigation">FOS Technologies</a><i>/</i>
+                <a href="#" className="headerNavigation">Moving Lights</a><i>/</i>
+                <a href="#" className="headerNavigation">Beam</a>
               </div>
             </div>
             <div className="breadcrumb new fixed" id="breadcrumb_interactive">
               <div className="mainwrap">
                 <div className="interactive_breadcrumb">
                   <div className="breadcrumb_seperator container home">
-                    <a className="breadcrumb_home" href="https://www.fos-lighting.eu">
+                    <a className="breadcrumb_home" href="#">
                       <i className="las la-home" aria-hidden="true"></i>
                     </a>
                   </div>
                   <div className="breadcrumb_seperator container">
                     <div className="holder">
                       <div className="inner_holder">
-                        <div className="interactive wordwrap" data-type="products_category" data-id="172" data-link="https://www.fos-lighting.eu/fos-technologies-c-172.html">
+                        <div className="interactive wordwrap" data-type="products_category" data-id="172" data-link="#">
                           <span>FOS Technologies</span>
                         </div>
                         <i className="las la-arrow-right gotolink" aria-hidden="true"></i>
@@ -126,10 +125,10 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
                             <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'block' }}></i>
                           </li>
-                          <li data-initial-id="172" data-link="https://www.fos-lighting.eu/fos-technologies-c-172.html" className="update_breadcrumb_title selected">FOS Technologies</li>
-                          <li data-initial-id="173" data-link="https://www.fos-lighting.eu/intelligent-audio-c-173.html" className="update_breadcrumb_title">Intelligent Audio</li>
-                          <li data-initial-id="174" data-link="https://www.fos-lighting.eu/visualization-tools-c-174.html" className="update_breadcrumb_title"> Visualization Tools</li>
-                          <li data-initial-id="175" data-link="https://www.fos-lighting.eu/truss-suspension-c-175.html" className="update_breadcrumb_title">Truss &amp; Suspension</li>
+                          <li data-initial-id="172" data-link="#" className="update_breadcrumb_title selected">FOS Technologies</li>
+                          <li data-initial-id="173" data-link="#" className="update_breadcrumb_title">Intelligent Audio</li>
+                          <li data-initial-id="174" data-link="#" className="update_breadcrumb_title"> Visualization Tools</li>
+                          <li data-initial-id="175" data-link="#" className="update_breadcrumb_title">Truss &amp; Suspension</li>
                         </ul>
                       </div>
                     </div>
@@ -137,7 +136,7 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                   <div className="breadcrumb_seperator container">
                     <div className="holder">
                       <div className="inner_holder">
-                        <div className="interactive wordwrap" data-type="products_category" data-id="5" data-link="https://www.fos-lighting.eu/moving-lights-c-172_5.html">
+                        <div className="interactive wordwrap" data-type="products_category" data-id="5" data-link="#">
                           <span>Moving Lights</span>
                         </div>
                         <i className="las la-arrow-right gotolink" aria-hidden="true"></i>
@@ -146,22 +145,22 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
                             <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'block' }}></i>
                           </li>
-                          <li data-initial-id="5" data-link="https://www.fos-lighting.eu/moving-lights-c-172_5.html" className="update_breadcrumb_title selected">Moving Lights</li>
-                          <li data-initial-id="68" data-link="https://www.fos-lighting.eu/led-par-c-172_68.html" className="update_breadcrumb_title">Led Par</li>
-                          <li data-initial-id="17" data-link="https://www.fos-lighting.eu/stage-lighting-c-172_17.html" className="update_breadcrumb_title">Stage Lighting</li>
-                          <li data-initial-id="11" data-link="https://www.fos-lighting.eu/static-led-c-172_11.html" className="update_breadcrumb_title">Static Led</li>
-                          <li data-initial-id="58" data-link="https://www.fos-lighting.eu/battery-operated-c-172_58.html" className="update_breadcrumb_title">Battery Operated</li>
-                          <li data-initial-id="19" data-link="https://www.fos-lighting.eu/led-strobe-c-172_19.html" className="update_breadcrumb_title">Led Strobe</li>
-                          <li data-initial-id="20" data-link="https://www.fos-lighting.eu/laser-c-172_20.html" className="update_breadcrumb_title">Laser</li>
-                          <li data-initial-id="73" data-link="https://www.fos-lighting.eu/follow-spots-c-172_73.html" className="update_breadcrumb_title">Follow Spots</li>
-                          <li data-initial-id="72" data-link="https://www.fos-lighting.eu/moving-fixtures-c-172_72.html" className="update_breadcrumb_title">Moving Fixtures</li>
-                          <li data-initial-id="30" data-link="https://www.fos-lighting.eu/dmx-tools-c-172_30.html" className="update_breadcrumb_title">DMX Tools</li>
-                          <li data-initial-id="22" data-link="https://www.fos-lighting.eu/smoke-effects-c-172_22.html" className="update_breadcrumb_title">Smoke &amp; Effects</li>
-                          <li data-initial-id="88" data-link="https://www.fos-lighting.eu/architectural-lighting-c-172_88.html" className="update_breadcrumb_title">Architectural Lighting</li>
-                          <li data-initial-id="31" data-link="https://www.fos-lighting.eu/cables-plugs-c-172_31.html" className="update_breadcrumb_title">Cables &amp; Plugs</li>
-                          <li data-initial-id="42" data-link="https://www.fos-lighting.eu/power-distribution-c-172_42.html" className="update_breadcrumb_title">Power Distribution</li>
-                          <li data-initial-id="53" data-link="https://www.fos-lighting.eu/fabrics-gear-c-172_53.html" className="update_breadcrumb_title">Fabrics &amp; Gear</li>
-                          <li data-initial-id="37" data-link="https://www.fos-lighting.eu/cases-accessories-c-172_37.html" className="update_breadcrumb_title">Cases &amp; Accessories</li>
+                          <li data-initial-id="5" data-link="#" className="update_breadcrumb_title selected">Moving Lights</li>
+                          <li data-initial-id="68" data-link="#" className="update_breadcrumb_title">Led Par</li>
+                          <li data-initial-id="17" data-link="#" className="update_breadcrumb_title">Stage Lighting</li>
+                          <li data-initial-id="11" data-link="#" className="update_breadcrumb_title">Static Led</li>
+                          <li data-initial-id="58" data-link="#" className="update_breadcrumb_title">Battery Operated</li>
+                          <li data-initial-id="19" data-link="#" className="update_breadcrumb_title">Led Strobe</li>
+                          <li data-initial-id="20" data-link="#" className="update_breadcrumb_title">Laser</li>
+                          <li data-initial-id="73" data-link="#" className="update_breadcrumb_title">Follow Spots</li>
+                          <li data-initial-id="72" data-link="#" className="update_breadcrumb_title">Moving Fixtures</li>
+                          <li data-initial-id="30" data-link="#" className="update_breadcrumb_title">DMX Tools</li>
+                          <li data-initial-id="22" data-link="#" className="update_breadcrumb_title">Smoke &amp; Effects</li>
+                          <li data-initial-id="88" data-link="#" className="update_breadcrumb_title">Architectural Lighting</li>
+                          <li data-initial-id="31" data-link="#" className="update_breadcrumb_title">Cables &amp; Plugs</li>
+                          <li data-initial-id="42" data-link="#" className="update_breadcrumb_title">Power Distribution</li>
+                          <li data-initial-id="53" data-link="#" className="update_breadcrumb_title">Fabrics &amp; Gear</li>
+                          <li data-initial-id="37" data-link="#" className="update_breadcrumb_title">Cases &amp; Accessories</li>
                         </ul>
                       </div>
                     </div>
@@ -169,7 +168,7 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                   <div className="container">
                     <div className="holder">
                       <div className="inner_holder">
-                        <div className="interactive wordwrap" data-type="products_category" data-id="7" data-link="https://www.fos-lighting.eu/beam-c-172_5_7.html">
+                        <div className="interactive wordwrap" data-type="products_category" data-id="7" data-link="#">
                           <span>Beam</span>
                         </div>
                         <i className="las la-arrow-right gotolink" aria-hidden="true"></i>
@@ -178,12 +177,12 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                             <input type="text" name="search_breadcrumb" id="search_breadcrumb" value="Search" onBlur={() => { if (this.value=='') this.value='Search' }} onFocus={() => { if(this.value =='Search' ) this.value='' }} className="selectform search_breadcrumb" autoComplete="off" />
                             <i className="las la-times clear_breadcrumb_search" aria-hidden="true" style={{ display: 'none' }}></i>
                           </li>
-                          <li data-initial-id="6" data-link="https://www.fos-lighting.eu/hybrid-c-172_5_6.html" className="update_breadcrumb_title selected">Hybrid</li>
-                          <li data-initial-id="7" data-link="https://www.fos-lighting.eu/beam-c-172_5_7.html" className="update_breadcrumb_title ">Beam</li>
-                          <li data-initial-id="8" data-link="https://www.fos-lighting.eu/wash-c-172_5_8.html" className="update_breadcrumb_title">Wash</li>
-                          <li data-initial-id="9" data-link="https://www.fos-lighting.eu/spot-c-172_5_9.html" className="update_breadcrumb_title">Spot</li>
-                          <li data-initial-id="86" data-link="https://www.fos-lighting.eu/waterproof-c-172_5_86.html" className="update_breadcrumb_title">Waterproof</li>
-                          <li data-initial-id="10" data-link="https://www.fos-lighting.eu/multi-beam-c-172_5_10.html" className="update_breadcrumb_title">Multi Beam</li>
+                          <li data-initial-id="6" data-link="#" className="update_breadcrumb_title selected">Hybrid</li>
+                          <li data-initial-id="7" data-link="#" className="update_breadcrumb_title ">Beam</li>
+                          <li data-initial-id="8" data-link="#" className="update_breadcrumb_title">Wash</li>
+                          <li data-initial-id="9" data-link="#" className="update_breadcrumb_title">Spot</li>
+                          <li data-initial-id="86" data-link="#" className="update_breadcrumb_title">Waterproof</li>
+                          <li data-initial-id="10" data-link="#" className="update_breadcrumb_title">Multi Beam</li>
                         </ul>
                       </div>
                     </div>
@@ -217,8 +216,7 @@ const Breadcrumb = ({  activeSubcategoryId, setActiveSubcategoryId }) => {
                 </a>
                 ))}
               </Slider>
-             
-           
+        
           </div>
           <div className="headingtitle padding_top">
             <h1 className="">
@@ -374,7 +372,7 @@ console.log(SubCategoryState)
             .map((product, index) => (
               <div key={product.id} className="col-md-6 col-lg-4 mb-4 px-3 ">
               <div className="card product-card shadow-sm h-100 ">
-                <a href={`https://www.fos-lighting.eu/${product.slug}-p-${product.id}.html`} className="text-decoration-none">
+                <a href={`/ProductDetail/${product.id}`} className="text-decoration-none">
                   <img
                     src={product.image || '/images/default-product.jpg'}
                     className="card-img-top"

@@ -59,7 +59,7 @@ function New() {
                     <div className="wrap inner pt-10 pb-10 pr-5 pl-5">
                       <div className="projects-title-cont">
                         <h2>{t('ourProjects')}</h2>
-                        <Link to="/projects" className="more">
+                        <Link to="/projects" className="more" style={{color : "red"}}>
                           {t('viewAllProjects')}
                         </Link>
                       </div>

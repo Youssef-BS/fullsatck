@@ -2,24 +2,14 @@ import React, { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { getWishlistsByUser, removeProductFromWishlist, updateProductQuantity } from '../Features/wishlist/wishlistSlice.js';
 import { Link } from 'react-router-dom';
+import { selectCurrentUser } from '../Features/auth/authSlice.js';
 
 const OrderList = () => {
-  const [orderList, setOrderList] = useState([
-    {
-      id: 1020,
-      name: 'IWM-200',
-      price: 172.50,
-      quantity: 1,
-      imageUrl: 'uploads/thumbnails/products_0_image_1020.jpg.thumb_96x64.jpg',
-      productUrl: 'https://www.fos-lighting.eu/iwm-200-p-1020.html',
-      model: 'L005774'
-    },
-    // Add more items as needed
-  ]);
+  const CurrentUser = useSelector(selectCurrentUser());
   const WishlistState = useSelector((state)=> state.wishlist.wishlists)
   const upd = useSelector((state)=> state.wishlist.upd)
   const dispatch = useDispatch()
-  const userId = 1;
+  const userId = parseInt(CurrentUser?.user?.id);
   useEffect(()=>{
     dispatch(getWishlistsByUser(userId))
   },[dispatch,upd,userId])
@@ -46,9 +36,9 @@ dispatch(removeProductFromWishlist({wishlistId,productId}))
     <div id="mainbody" className="mainbody">
       <div className="breadcrumb" id="breadcrumb_static">
         <div className="mainwrap container-fluid">
-          <a href="https://www.fos-lighting.eu" className="headerNavigation">Home</a>
+          <a href="#" className="headerNavigation">Home</a>
           <i>/</i>
-          <a href="https://www.fos-lighting.eu/wishlist.php" className="headerNavigation">Order List</a>
+          <a href="#" className="headerNavigation">Order List</a>
         </div>
       </div>
       <div id="maincontent" className="maincontent">
@@ -152,7 +142,7 @@ dispatch(removeProductFromWishlist({wishlistId,productId}))
                                       <div className="description prices-not-include-vat">Prices do not include VAT</div>
                                   </div>
                                   <div className="description buttons">
-                                      <a href="https://www.fos-lighting.eu/create_order_list_pdf.php?download_order_list=true">
+                                      <a href="#">
                                           <div className="shop-btn has-icon right">
                                               <span>ORDER LIST</span>
                                               <i className="las la-file-download"></i>
@@ -160,7 +150,7 @@ dispatch(removeProductFromWishlist({wishlistId,productId}))
                                       </a>
                                   </div>
                                   <div className="description buttons">
-                                      <a href="https://www.fos-lighting.eu/create_order_brochure_pdf.php?download_brochure_list=true">
+                                      <a href="#">
                                           <div className="shop-btn has-icon right">
                                               <span>ORDER BROCHURE</span>
                                               <i className="las la-file-download"></i>

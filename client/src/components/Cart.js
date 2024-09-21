@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
 import { useTranslation } from 'react-i18next';
 import { selectCurrentUser } from '../Features/auth/authSlice';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 
 const Cart = ({ closeCart }) => {
@@ -103,10 +106,10 @@ const Cart = ({ closeCart }) => {
                     </div>
                     <div className="actionbar">
                       <span>
-                        <i
+                        <RemoveIcon
                           className="las la-minus update-minicart-quantity decrease-minicart-quantity"
                           onClick={() => decreaseQuantity(cartState[0].id, item.Product.id, item.quantity)}
-                        ></i>
+                        ></RemoveIcon>
                       </span>
                       <span>
                         <input
@@ -120,10 +123,10 @@ const Cart = ({ closeCart }) => {
                         <input type="hidden" name="multiples_conversion" value="1" />
                       </span>
                       <span>
-                        <i
+                        <AddIcon
                           className="las la-plus update-minicart-quantity increase-minicart-quantity"
                           onClick={() => increaseQuantity(cartState[0].id, item.Product.id, item.quantity)}
-                        ></i>
+                        ></AddIcon>
                       </span>
                       <span className="productRemoveMiniCart">
                         <div className="delete action">
@@ -135,10 +138,10 @@ const Cart = ({ closeCart }) => {
                           />
                         </div>
                         <div className="delete text minicart_close">
-                          <i
+                          <DeleteIcon
                             className="las la-trash-alt minicart_delete_product"
                             onClick={() => removeItem(cartState[0].id, item.Product.id)}
-                          ></i>
+                          ></DeleteIcon>
                         </div>
                       </span>
                     </div>

@@ -42,10 +42,12 @@ const CategoryBox = () => {
 
   const settings = {
     arrows: true,
+    autoplay : true ,
+    autoplaySpeed: 4000,
     infinite: true,
-    speed: 5000,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    speed: 1300,
+    slidesToShow: 4,
+    slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1445,
@@ -84,7 +86,7 @@ const CategoryBox = () => {
         <div className="row">
           {MarketState?.slice(0, 4).map((market) => (
             <div key={market.id} className="col-xl-6 mb-4">
-              <div className="category-box">
+              <div className="category-box shadow">
                 <div className="category-box__left">
                   <Link to={`/explore/${market.id}`} className="category-box__image-wrapper">
                     <img
@@ -93,14 +95,6 @@ const CategoryBox = () => {
                       alt="Intelligent Lighting Technology"
                     />
                   </Link>
-                  <h2 className="category-box__title">{market.name}</h2>
-                  <div className="category-box__text">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam
-                  </div>
-                  <Link to={`/explore/${market.id}`} className="btn btn-primary-gray btn-big-fn18 category-box__btn">
-                    Explore
-                  </Link>
                 </div>
                 <div className="category-box__right">
                   <Slider {...settings}>
@@ -108,7 +102,7 @@ const CategoryBox = () => {
                       (product) =>
                         product?.MarketId === market?.id && (
                           <div key={product.id}>
-                            <div className="product-box">
+                            <div className="custom-product-box">
                               <div className="compare-icon-container" style={{ position: 'relative' }}>
                                 <svg
                                   onClick={() => handleAddToCompare(product)}
@@ -142,7 +136,11 @@ const CategoryBox = () => {
                         )
                     )}
                   </Slider>
+                  
                 </div>
+                <Link to={`/explore/${market.id}`} className="btn btn-primary-gray btn-big-fn18 category-box__btn">
+                    Explore
+                  </Link>
               </div>
             </div>
           ))}

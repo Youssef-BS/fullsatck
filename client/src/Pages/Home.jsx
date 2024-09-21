@@ -9,8 +9,8 @@ import NewsRoom from '../components/newsroom/NewsRoom'
 const Home = () => {
   return (
     <>
-    <Boxes />   
-    <Videos />
+    <Boxes />
+    <Videos />       
     <NewsRoom />
     <ProductBox />
     <New />

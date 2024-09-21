@@ -15,9 +15,9 @@ const AllNewsRoom = () => {
                     {/* News items */}
                     <div className="col-lg-6">
                       <div className="home-boxes__box home-boxes__box--white">
-                        <a href="https://www.fos-lighting.eu/iem-pro-p-2795.html" className="wrap-link row flex-column flex-xl-row">
+                        <a href="#" className="wrap-link row flex-column flex-xl-row">
                           <div className="home-boxes__box-left col-12 col-lg">
-                            <img src="https://www.fos-lighting.eu/uploads/thumbnails/news_0_image_31.jpg.thumb_190x126.jpg" className="img-fluid" alt="" />
+                            <img src="#" className="img-fluid" alt="" />
                           </div>
                           <div className="home-boxes__box-right col">
                             <h2>IEM-PRO stereo wireless monitoring</h2>
@@ -28,7 +28,6 @@ const AllNewsRoom = () => {
                         </a>
                       </div>
                     </div>
-                    {/* Add more news items */}
                   </div>
                 </div>
               </div>

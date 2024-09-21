@@ -7,6 +7,7 @@ import Cart from './Cart';
 import { Link } from 'react-router-dom';
 import { Search } from '../Features/Product/ProductSlice';
 import { t, use } from 'i18next';
+
 const MainHeader = () => {
     const [isInputEmpty, setIsInputEmpty] = useState(false);
     const [query, setQuery] = useState('');
@@ -70,13 +71,13 @@ const MainHeader = () => {
         
         <SideMenu isOpen={isMenuOpen} isopen2={isMenuOpen2}/>
         
-        <div className="main-header">
+        <div className="main-header" style={{backgroundColor : "#F5F5F5"}}>
             <div className="container-fluid">
                 <div className="row align-items-center">
-                    <div className="col menu-col">
+                    <div className="col menu-col ">
                         <div className="row menu-row">
                             <div className="col logo my-auto">
-                                <Link to="/"><img className="header-logo" src="/images/logo1.svg" alt="Logo" /></Link>
+                                <Link to="/"><img className="header-logo" src="/images/logo3.jpg" alt="Logo" /></Link>
                             </div>
                             <div className="col-auto button menu">
                                 {isMenuOpen ?<a href="#" className="menu-open clicked"onClick={toggleMenu}>
@@ -93,33 +94,28 @@ const MainHeader = () => {
                                 <FiMenu className="las la-bars" style={{ fontSize: '25px', position: 'absolute', left: '10px', height: '25px', top: '50%', transform: 'translateY(-50%)' }} />
                                 </div>
                             </div>
-                            {/* <div className="col-auto icon d-none">
-                                <a href="#" className="search-toggle">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.377 11.6288H12.587L12.307 11.3588C13.507 9.9588 14.127 8.0488 13.787 6.0188C13.317 3.2388 10.997 1.0188 8.19697 0.678799C3.96697 0.158799 0.406968 3.7188 0.926968 7.9488C1.26697 10.7488 3.48697 13.0688 6.26697 13.5388C8.29697 13.8788 10.207 13.2588 11.607 12.0588L11.877 12.3388V13.1288L16.127 17.3788C16.537 17.7888 17.207 17.7888 17.617 17.3788C18.027 16.9688 18.027 16.2988 17.617 15.8888L13.377 11.6288ZM7.37697 11.6288C4.88697 11.6288 2.87697 9.6188 2.87697 7.1288C2.87697 4.6388 4.88697 2.6288 7.37697 2.6288C9.86697 2.6288 11.877 4.6388 11.877 7.1288C11.877 9.6188 9.86697 11.6288 7.37697 11.6288Z" fill="#454852" />
-                                    </svg>
-                                </a>
-                            </div> */}
                         </div>
                     </div>
                     <div className="col search-header-col">
                         <div className="header-search">
-                            {/* <div className="header-search__icon">
-                                <img src="images/icons/search.svg" alt="Search" />
-                            </div> */}
-                            <div className="search-container inner txt-c clearfix search--open" id="search-container">
-                                <div className="search search__form" id="search_bar">
-                                    <form name="quick_find" id="quick_find" action="https://www.fos-lighting.eu/advanced_search_result.php" method="get">
-                                        <input type="text" name="keywords" id="keywords" onChange={handleInputChange} className="selectform keywords" autoComplete="off" placeholder="I'm looking for..." />
-                                        <svg  width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M13.377 11.6288H12.587L12.307 11.3588C13.507 9.9588 14.127 8.0488 13.787 6.0188C13.317 3.2388 10.997 1.0188 8.19697 0.678799C3.96697 0.158799 0.406968 3.7188 0.926968 7.9488C1.26697 10.7488 3.48697 13.0688 6.26697 13.5388C8.29697 13.8788 10.207 13.2588 11.607 12.0588L11.877 12.3388V13.1288L16.127 17.3788C16.537 17.7888 17.207 17.7888 17.617 17.3788C18.027 16.9688 18.027 16.2988 17.617 15.8888L13.377 11.6288ZM7.37697 11.6288C4.88697 11.6288 2.87697 9.6188 2.87697 7.1288C2.87697 4.6388 4.88697 2.6288 7.37697 2.6288C9.86697 2.6288 11.877 4.6388 11.877 7.1288C11.877 9.6188 9.86697 11.6288 7.37697 11.6288Z" fill="#454852"></path>
-                                            </svg>                                        <div className="loader">
-                                            <div className="loader-icon"></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            {/* Add other search-related elements here */}
+                           <div class="container">
+
+<div>
+  <div class="col-md-6">
+    <form class="form">
+      <i class="fa fa-search"></i>
+      <input type="text" className="form-control form-input" placeholder="I'm looking for..." onChange={handleInputChange}/>
+      <img src="/images/icons/search.svg" alt="Search" />
+      <div className="loader" style={{ display: 'none' }}>
+              <div className="loader-icon"></div>
+            </div>
+    </form>
+    
+  </div>
+  
+</div>
+
+</div>
                             <div className={`acresults ${isOpen ? 'search--open ' : ''}`} id="acresults" style={{ display: isOpen ? 'block' : 'none' }}> 
             <div className="search-title">
                 <h3>{t('search_products')}</h3>
@@ -218,7 +214,7 @@ const MainHeader = () => {
         <div className="col-auto cart-contain ">
                                 <div className="shoppingcart toggler">
                                     <div className="shoppingpopup dynamic_content" onClick={toggleCart}>
-                                        <div id="mini-shopping-cart-details-dynamic" className="details">
+                                        <div id="mini-shopping-cart-details-dynamic" className="details" style={{backgroundColor : "#F5F5F5"}} >
                                             <svg viewBox="0 0 26 23">
                                                 <g fill="none" fillRule="nonzero" stroke="#000">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1.606 1h4.503l2.195 11.848a2.678 2.678 0 002.634 2.192h9.305c1.22 0 2.286-.824 2.593-2.004l2.071-8.007a.73.73 0 00-.706-.913L10.938 4.11"></path>

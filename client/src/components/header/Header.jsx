@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useDispatch, useSelector } from 'react-redux';
 import $ from 'jquery';
 import { GetAll } from '../../Features/Product/ProductSlice';
@@ -99,7 +97,7 @@ const HeaderComponent = () => {
 
   return (
     <>
-      <div className="top-bar">
+      <div className="top-bar shadow">
         <div className="container-fluid">
           <div className="row">
             <div className="col-6 col-lg-3 left">
@@ -152,8 +150,8 @@ const HeaderComponent = () => {
                   {CurrentUser ? (
                     <div id="logged" className="login h-100 d-flex align-items-center">
                       <a href="#" id="login-popup-link" className="login-popup-link h-100">
-                        <span className="user-name" style={{ color: "white" }}>{CurrentUser.user.firstname}</span>
-                        <AccountCircleIcon style={{ color: 'white' }} />
+                        <span className="user-name" style={{ color: "red" }}>{CurrentUser.user.firstname}</span>
+                        <AccountCircleIcon style={{ color: 'red' }} />
                       </a>
                       <ul className="logged_in_options">
                         <li>
@@ -181,8 +179,6 @@ const HeaderComponent = () => {
                       </a>
                     </div>
                     
-                    
-
                     </>
                   )}
                 </div>

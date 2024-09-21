@@ -32,9 +32,8 @@ import VerificationCode from './Pages/VerificationCode';
     const Layout = ({ children }) => {
         return (
             <>
-                <HeaderComponent />
+            <HeaderComponent />
                 <MainHeader />
-                <InfoBar />
                 {children}
                 <Footer />
             </>

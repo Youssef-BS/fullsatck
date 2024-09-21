@@ -6,11 +6,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { fetchCart, updateCartItemQuantity, removeFromCart } from '../Features/cart/cartSlice';
 import { selectCurrentUser } from '../Features/auth/authSlice';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 
 const ShoppingCart = () => {
   const CurrentUser = useSelector(selectCurrentUser);
-  const userId = parseInt(CurrentUser.user.id);
+  const userId = parseInt(CurrentUser?.user?.id);
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state?.cart?.cart);
   const updState = useSelector((state) => state?.cart?.upd);
@@ -47,7 +49,9 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div id="maincontent" className="maincontent cart">
+    <>
+    {CurrentUser && (
+      <div id="maincontent" className="maincontent cart">
       <div className="container-fluid">
         <div className="section-bg-w-br-30">
           <div id="shopping_cart_dynamic_content" className="mainwrap shopping_cart_dynamic_content mt-3 mb-5">
@@ -62,7 +66,7 @@ const ShoppingCart = () => {
                 <form
                   name="cart_quantity"
                   id="cart_quantity"
-                  action="https://www.fos-lighting.eu/shopping_cart.php?action=update_product"
+                  action="#"
                   method="post"
                 >
                   <div className="shoppingCart">
@@ -152,7 +156,7 @@ const ShoppingCart = () => {
                       </div>
 
                       <div className="description buttons">
-                        <a href="https://www.fos-lighting.eu">
+                        <a href="#">
                           <input
                             type="button"
                             border="0"
@@ -173,6 +177,11 @@ const ShoppingCart = () => {
         </div>
       </div>
     </div>
+    )}
+{!CurrentUser && <>
+<h1 className='text-danger text-center mt-5'>You don't have permission to continue login first</h1>
+</>}
+    </>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { GetAll, GetAllProducts,GetMarkets } from '../../Features/Product/ProductSlice';
+import { GetAllProducts,GetMarkets } from '../../Features/Product/ProductSlice';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Check, MonetizationOn } from '@mui/icons-material';
-import { BsChevronRight } from "react-icons/bs";
+import { ChevronRight } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 const SideMenu = ({ isOpen,isopen2,onClose }) => {
   const Side = useSelector((state)=> state.product.All )
@@ -20,20 +19,12 @@ const SideMenu = ({ isOpen,isopen2,onClose }) => {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [showThirdLevel, setShowThirdLevel] = useState(false);
     const [showFourthLevel, setShowFourthLevel] = useState(false);
-    const [showFiveLevel,setShowFiveLevel]= useState(false)
-    const [responsiveweb,setResponsiveWeb]=useState("");
     const [responsiveMob,setResponsiveMob]=useState("")
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const MarketState = useSelector((state)=> state?.product?.Markets);
-    const ProductState = useSelector((state)=> state?.product?.Products);
     const [activeMarket, setActiveMarket] = useState("");
     const [activeCategory, setActiveCategory] = useState(null);
     const [activeSub, setAtiveSub] = useState("");
-    const [activeSubSub, setActiveSubSub] = useState(null);
   
-
-  
-    const [activeMarketProducts, setActiveMarketProducts] = useState([]);
   const dispatch = useDispatch()
   
     useEffect (()=>{
@@ -180,11 +171,10 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
           <div className="mobile-title-menu">{t('mainMenu')}</div>
           <div id="closex" onClick={toggleMenuu}></div>
           <div id="ulwrapper">
-              {/* Define your UL (nested) menu below */}
               <ul className="submenu" style={{ zIndex: 183 }}>
                   <li className="breadcrumb">FOS Technologies</li>
                   <li className="menu-view-all">
-                      <a href="https://www.fos-lighting.eu/fos-technologies-c-172.html">{t('viewCategory')}</a>
+                      <a href="#">{t('viewCategory')}</a>
                   </li>
                   <li className="header">
                       <a href="#">Stage Lighting</a>
@@ -198,31 +188,29 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                       <a href="#">
                           FOS Technologies
                           <div className="root-image">
-                              <img src="uploads/thumbnails/categories_0_cat_image_172.png.thumb_100x90.png" border="0" title="FOS Technologies" alt="FOS Technologies" />
+                              <img src="https://www.fos-lighting.eu/images/logo.svg" border="0" title="FOS Technologies" alt="FOS Technologies" />
                           </div>
                       </a>
                   </li>
-                  {/* 
-                  <li className="mobile-menu-item first">
-                      <a href="https://www.new.fos-lighting.eu/specials.php">Offers</a>
-                  </li>
-                  */}
                   <li className="mobile-menu-item">
-                      <a href="https://www.fos-lighting.eu/news.php">{t('newsroom')}</a>
+                      <a href="#">{t('newsroom')}</a>
                   </li>
                   <li className="mobile-menu-item">
                       <a href="projects.php">{t('projects')}</a>
                   </li>
                   <li className="mobile-menu-item">
-                      <a href="who-we-are-pr-1.html">{t('aboutUs')}</a>
+                      <a href="#">{t('aboutUs')}</a>
                   </li>
                   <li className="mobile-menu-item">
-                      <a href="https://www.fos-lighting.eu/contact_us.php">{t('contactUs')}</a>
+                      <a href="#">{t('contactUs')}</a>
                   </li>
+                  
+                      <LanguageSwitcher  className="mobile-menu-item"/>
+                  
               </ul>
           </div>
       </nav>
-      <section className={`side-menu main-menu-container ${isOpen ? '' : 'hide'}`}>
+      <section className={`side-menu main-menu-container mt-3 ${isOpen ? '' : 'hide'}`}>
           <div className="inner">
               <div className="first-level">
                   <ul>
@@ -243,7 +231,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                   {market.name}
                                   <ChevronRight
                   className="las la-angle-right"
-                  data-href="https://www.fos-lighting.eu/active-speakers-c-173_97.html"
+                  data-href="#"
                   onClick={toggleThirdLevel}
                 />
                               </a>
@@ -268,7 +256,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                       </a>
                                                       <ChevronRight 
                                                           className={`las la-angle-right`}
-                                                          data-href="https://www.fos-lighting.eu/active-speakers-c-173_97.html"
+                                                          data-href="#"
                                                           onClick={toggleThirdLevel}
                                                       />
                                                       {showThirdLevel && category.id === activeCategory && (
@@ -298,7 +286,7 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                                                                               </a>
                                                                               <ChevronRight
                                                                                   className={`las la-angle-right`}
-                                                                                  data-href="https://www.fos-lighting.eu/abs-active-speakers-c-173_97_99.html"
+                                                                                  data-href="#"
                                                                               />
                                                                               {showFourthLevel &&
                                                                                   subcategory.id === activeSub && (
@@ -378,10 +366,10 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                   </ul>
                   <div className="tags-menu">
                       <span className="news">
-                          <a href="https://www.fos-lighting.eu/news.php">{t('newsroom')}</a>
+                          <a href="#">{t('newsroom')}</a>
                       </span>
                       <span className="account">
-                          <a href="https://www.fos-lighting.eu/create_account.php">{t('become_a_dealer')}</a>
+                          <a href="#">{t('become_a_dealer')}</a>
                       </span>
                       <span className="projects">
                           <a href="projects.php">{t('projects')}</a>
@@ -390,10 +378,10 @@ const handleSubcategoryClickl = (marketId, categoryId, subcategoryId) => {
                           <a href="who-we-are-pr-1.html">{t('aboutUs')}</a>
                       </span>
                       <span className="contact">
-                          <a href="https://www.fos-lighting.eu/contact_us.php">
+                          <a href="#">
                             {t('contactUs')}
-                          </a>
-                      </span>
+                          </a>  
+                      </span>        
                   </div>
               </div>
           </div>

@@ -50,7 +50,6 @@ const MainHeader = () => {
   return (
     <div className="main-header">
       <AccountPage/>
-      {/* Header content */}
       <div className="col search-header-col">
         <div className="header-search">
           <div className="search-container inner txt-c clearfix search--open" id="search-container">
@@ -72,11 +71,9 @@ const MainHeader = () => {
             </div>
           </div>
           <div className="acresults" id="acresults">
-            {/* Render search results */}
           </div>
         </div>
       </div>
-      {/* Other header content */}
 
     </div>
   );
